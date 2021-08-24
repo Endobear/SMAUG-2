@@ -1,4 +1,3 @@
-from Salas.RoomTwo import RoomTwo
 from Salas.Player import Player
 from Salas.RoomOne import RoomOne
 

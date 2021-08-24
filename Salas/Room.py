@@ -4,6 +4,7 @@ class Room():
         self.room_description = ""
         self.exits = []
         self.image = ""
+        self.interactives = []
 
     def change_location(self,location):
         if location in self.exits:

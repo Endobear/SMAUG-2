@@ -5,7 +5,7 @@ class RoomTwo(Room):
         self.room_name = "Room Two"
         self.room_description = "A Nice Room with Pink Walls"
         self.exits = ["Back"]
-        self.image = "graphics/amongus.png"
+        self.image = "graphics/Room2.png"
         self.returnRoom = previusRoom
     
     def backLocation(self):
