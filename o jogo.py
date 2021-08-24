@@ -13,6 +13,7 @@ clock = pygame.time.Clock()
 rooms = [RoomOne()]
 player = Player()
 player.currentRoom = rooms[0]
+debug_rects = False
 
 background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
 background_rects = player.currentRoom.interactives
@@ -22,11 +23,30 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if  event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                for rect in background_rects:
+                    if rect.collidepoint(event.pos):
+                        print("clicou", rect)
+                        player.currentRoom.ineractRect(rect,player)
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                if debug_rects:
+                    debug_rects = False
+                else:
+                    debug_rects = True
+                        
+    background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
+    background_rects = player.currentRoom.interactives
     
     screen.blit(background_surf,(0,0))
     
-    for rect in background_rects:
-        pygame.draw.rect(screen,(255, 0 , 0),rect)
+    if debug_rects:
+        for rect in background_rects:
+            pygame.draw.rect(screen,(255, 0 , 0),rect)
+        
+
 
     pygame.display.update()
     clock.tick(60)
