@@ -8,7 +8,10 @@ class Room():
         self.interactives = [] # Lista de retângulos que o Player pode clicar
         self.id = ""
 
-   
+    def change_location(self,location): 
+        if location in self.exits:
+            return self.getLocationFromDirection(location)
+
     # Função que pega uma direção em string e chama a função com a classe da sala daquela direção
     def getLocationFromDirection(self,direction):
         if direction in self.exits:
@@ -20,7 +23,8 @@ class Room():
                 return self.frontLocation()
 
 
-    
+    def interact(self):
+      self.interactMessage = "There is nothing to interact"
             
     def upLocation(self):
         return
