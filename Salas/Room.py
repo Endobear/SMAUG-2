@@ -33,6 +33,8 @@ class Room():
     def ineractRect(self,rect,player):
         return
 
+    def RoomExitClassFromMap(self,mapa,exit):
+        return mapa.exitsList[self.id].get(exit)
 
 
 

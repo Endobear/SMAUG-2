@@ -12,7 +12,10 @@ class RoomOne(Room):
         self.exitsName = ["FrontDoor"]
         self.image = "graphics/Room1_closedDoor.png"
         self.ArrowSprites = pygame.sprite.Group()
-        self.ArrowSprites.add(FrontArrow(),UpArrow())
+
+        seta_sprite = UpArrow((400,100))
+
+        self.ArrowSprites.add(seta_sprite)
         # as seguintes salas estão em variáveis para evitar perda de dados
         self.roomOneDoor = RoomOneDoor(self) # Variável com a classe Room da porta
         self.roomOneCeiling = RoomOneCeiling(self)  # Variável com a classe Room do teto
@@ -20,14 +23,12 @@ class RoomOne(Room):
         self.map = map
         
 
-        # TODO colocar retângulos e setas em uma clase diferente
+        # TODO colocar retângulos e setas em uma classe diferente
         porta_rect = pygame.Rect((357,205),(90,121))
-        seta_rect = pygame.Rect((384,68),(27,40))
 
-        self.interactives = [porta_rect , seta_rect] # lista de retângulos interagíves, porta e seta. Mais tarde alguns desses retângulos terão seus próprios sprites
+        self.interactives = [porta_rect , seta_sprite.rect] # lista de retângulos interagíves, porta e seta. Mais tarde alguns desses retângulos terão seus próprios sprites
 
-    def RoomExitClassFromMap(self,mapa,exit):
-        return mapa.exitsList[self.id].get(exit)
+    
     
     def upLocation(self):
         return self.roomOneCeiling
@@ -35,7 +36,7 @@ class RoomOne(Room):
         if self.roomOneDoor.doorStatus == "Closed":
             return self.roomOneDoor
         else:
-            return self.roomOneDoor.roomTwo
+            return self.RoomExitClassFromMap(self.map, self.exitsName[0])
 
         
     def ineractRect(self,rect,player):
@@ -52,14 +53,15 @@ class RoomOneCeiling(Room):
         self.room_name = "Ceiling"
         self.room_description = "The ceiling of the room, It dosen\'t have lights"
         self.exits = ["Back"]
+
+        arrow = BackArrow((380,366))
         self.ArrowSprites = pygame.sprite.Group()
-        self.ArrowSprites.add(BackArrow())
+        self.ArrowSprites.add(arrow)
         self.image = "graphics/Room1_ceiling.png"
         self.RoomOne = RoomOne
         self.id = "RoomOneCeiling"
 
-        seta = pygame.Rect((362,366),(39,45))
-        self.interactives = [seta]
+        self.interactives = [arrow.rect]
     
     def backLocation(self):
         return self.RoomOne
@@ -75,14 +77,17 @@ class RoomOneDoor(Room):
         self.doorStatus = "Closed"
         self.room_description = "The door of the white room, it is " + self.doorStatus
         self.exits = ["Back"]
+        
+        backArrow = BackArrow((390,446))
+
         self.ArrowSprites = pygame.sprite.Group()
-        self.ArrowSprites.add(BackArrow())
+        self.ArrowSprites.add(backArrow)
         self.image = "graphics/Room1_door"+self.doorStatus+".png"
         self.RoomOne = RoomOne
         self.id = "RoomOneDoor"
 
         porta = pygame.Rect((270,68),(262,336))
-        self.interactives = [porta]
+        self.interactives = [porta,backArrow.rect]
     
     
     def interact(self):
@@ -106,12 +111,16 @@ class RoomOneDoor(Room):
                 self.exits.append("Front")
                 self.RoomOne.image = "graphics/Room1_openDoor.png"
             else:
-                player.currentRoom = self.RoomOne.RoomExitClassFromMap(self.RoomOne.map, self.RoomOne.exitsName[0])
+                player.currentRoom = self.frontLocation()
+
+        if rect == self.interactives[1]:
+            player.currentRoom = self.RoomOne
+            
                 
 
     def frontLocation(self):
         if "Front" in self.exits:
-            return self.roomTwo
+            return self.RoomOne.RoomExitClassFromMap(self.RoomOne.map, self.RoomOne.exitsName[0])
         else:
             return self
 
