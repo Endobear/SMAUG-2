@@ -59,6 +59,7 @@ class Room():
         return mapa.exitsList[self.id].get(exit)
 
     def update(self,screen):
+        # print(self.itens_sprites)
         self.ArrowSprites.draw(screen)
         self.itens_sprites.draw(screen)
         self.itens_sprites.add(item for item in self.itens)

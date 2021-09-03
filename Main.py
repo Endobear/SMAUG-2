@@ -45,6 +45,8 @@ while True:
                     debug_rects = True
             if event.key == pygame.K_c:
                 print(background_rects)
+            if event.key == pygame.K_a:
+                print(player.inventory)
         
         if event.type == pygame.MOUSEMOTION:
             
@@ -66,6 +68,9 @@ while True:
 
     inventory_surf.fill(("Blue"))
     screen.blit(inventory_surf,inventory_rect)
+
+    pygame.draw.rect(inventory_surf,(255, 255 , 0),inventory_rect)
+    player.updateInventory(screen,inventory_rect)
 
     if(hover_inventory):
         if inventory_lerp + 0.1 <1: 
