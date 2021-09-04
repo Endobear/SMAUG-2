@@ -6,6 +6,7 @@ class Player():
        self.currentRoom = ""
        self.inventory = pygame.sprite.Group()
        self.hits = 0
+       self.itemHolding = pygame.sprite.GroupSingle()
 
     def pickItem(self,item):
         item.rect.center = (10,10)
@@ -17,10 +18,13 @@ class Player():
         index = 0
 
         for item in self.inventory.sprites():
-            item.rect.center = (rect.x + item.image.get_width(), rect.y + item.image.get_height())
-            # print(item.rect)
+            if self.itemHolding.has(item) == False:
+                item.rect.center = (rect.x + item.image.get_width(), rect.y + item.image.get_height())
+                # print(item.rect)
+                screen.blit(item.image,item.rect)
+            else:
+                self.itemHolding.draw(screen)
             
-            screen.blit(item.image,item.rect)
             index += 1
         
 

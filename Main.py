@@ -3,6 +3,7 @@ from pygame.constants import MOUSEMOTION
 from Salas.Player import Player
 from Mapa import Mapa
 from sys import exit
+from Itens.Itens import Item
 
 from pygame import display
 
@@ -32,10 +33,27 @@ while True:
 
         if  event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                for rect in background_rects:
-                    if rect.collidepoint(event.pos):
-                        print("clicou", rect)
-                        player.currentRoom.ineractRect(rect,player)
+
+                if player.itemHolding.sprites() == []:
+                    
+                    for rect in background_rects:
+                        if rect.collidepoint(event.pos):
+                            print("clicou", rect)
+                            player.currentRoom.ineractRect(rect,player)
+
+                
+                    for item in player.inventory.sprites():
+                        if item.rect.collidepoint(event.pos):
+                            player.itemHolding.add(item)
+               
+                    
+                    
+                    
+
+
+        if  event.type == pygame.MOUSEBUTTONUP:
+            if player.itemHolding.sprites() != []:
+                player.itemHolding.empty()
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
@@ -45,8 +63,14 @@ while True:
                     debug_rects = True
             if event.key == pygame.K_c:
                 print(background_rects)
+
             if event.key == pygame.K_a:
+                print(player.inventory.sprites())
+                print(player.itemHolding.sprites())
+
+            if event.key == pygame.K_s:
                 print(player.inventory)
+                print(player.itemHolding)
         
         if event.type == pygame.MOUSEMOTION:
             
@@ -56,6 +80,11 @@ while True:
             else:
                 ##print("Fora do Inventário")
                 hover_inventory = False
+
+            if player.itemHolding.sprites() != []: 
+                
+                player.itemHolding.sprites()[0].rect.center = event.pos
+                
                         
     background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
     background_rects = player.currentRoom.room_rects
@@ -72,6 +101,7 @@ while True:
     pygame.draw.rect(inventory_surf,(255, 255 , 0),inventory_rect)
     player.updateInventory(screen,inventory_rect)
 
+    
     if(hover_inventory):
         if inventory_lerp + 0.1 <1: 
             inventory_lerp += 0.15
