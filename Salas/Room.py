@@ -53,7 +53,9 @@ class Room():
                    
                    break;      
                 index += 1           
-        
+    
+    def useItem(self,rect,item):
+        pass
 
     def RoomExitClassFromMap(self,mapa,exit):
         return mapa.exitsList[self.id].get(exit)

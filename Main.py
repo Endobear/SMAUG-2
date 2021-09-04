@@ -23,7 +23,7 @@ hover_inventory = False
 inventory_lerp = 0
 
 background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
-background_rects = player.currentRoom.room_rects
+background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
 
 while True:
     for event in pygame.event.get():
@@ -53,6 +53,10 @@ while True:
 
         if  event.type == pygame.MOUSEBUTTONUP:
             if player.itemHolding.sprites() != []:
+                for rect in background_rects:
+                        if rect.collidepoint(event.pos):
+                            player.currentRoom.useItem(rect,player.itemHolding.sprites()[0])
+                
                 player.itemHolding.empty()
 
         if event.type == pygame.KEYDOWN:

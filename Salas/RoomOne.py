@@ -40,7 +40,7 @@ class RoomOne(Room):
         
     def ineractRect(self,rect,player):
         super().ineractRect(rect,player)
-        if rect == self.interactives[0]: # Seta que vai para o teto da sala
+        if rect == self.interactives[0]: # Porta da sala
             player.currentRoom = self.getLocationFromDirection("Front")
 
 
