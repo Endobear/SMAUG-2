@@ -55,7 +55,7 @@ while True:
             if player.itemHolding.sprites() != []:
                 for rect in background_rects:
                         if rect.collidepoint(event.pos):
-                            player.currentRoom.useItem(rect,player.itemHolding.sprites()[0])
+                            player.currentRoom.useItem(rect,player)
                 
                 player.itemHolding.empty()
 

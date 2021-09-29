@@ -26,6 +26,13 @@ class Player():
                 self.itemHolding.draw(screen)
             
             index += 1
-        
+    
+    def removeItem(self,item):
+        for invItem in self.inventory:
+            if item == invItem:
+                self.inventory.remove(invItem)
+            break;
+
+        pass
     
 

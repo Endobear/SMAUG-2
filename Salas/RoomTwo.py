@@ -74,12 +74,14 @@ class RoomTwoDoor(Room):
         if rect == (self.interactives[1] or self.interactives[0]) and self.doorStatus == "Open": # Porta da sala
             player.currentRoom = self.getLocationFromDirection("Front")
     
-    def useItem(self, rect, item):
-       if rect in self.interactives:
-           if rect == self.interactives[0] and item.type == KeyItem().type:
+    def useItem(self, rect, player):
+        itemHolding = player.itemHolding.sprites()[0]
+        if rect in self.interactives:
+           if rect == self.interactives[0] and itemHolding.type == KeyItem().type:
                self.doorStatus = "Open"
                self.image = "graphics/Room2_doorOpen.png"
                self.roomTwo.image = "graphics/Room2_OpenDoor.png"
+               player.removeItem(itemHolding)
                
         
         
