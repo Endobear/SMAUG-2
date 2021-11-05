@@ -10,7 +10,7 @@ class Quarto(Room):
         self.exits = ["Up","Back"]
         self.exitsName = ["QuartoPorta"]
         
-        self.arrows = [BackArrow((380,366))]
+        self.arrows = [BackArrow((380,366)),UpArrow((400,100))]
         
         self.comoda = QuartoComoda(self)
         self.quartoPorta = QuartoPorta(self)
@@ -65,7 +65,7 @@ class QuartoTeto(Room):
         super().__init__()
         self.room_name = "QuartoTeto"
         self.exits = ["Back"]
-        self.image = "graphics/Room1_closedDoor.png"
+        self.image = "graphics/Quarto_teto.png"
 
         
 

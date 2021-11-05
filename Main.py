@@ -102,10 +102,13 @@ while True:
     screen.blit(background_surf,(0,0))
     player.currentRoom.update(screen)
 
-    inventory_surf.fill(("Blue"))
+    inventory_surf.fill(pygame.Color(0,0,255))
+    inventory_surf.set_alpha(123)
+
     screen.blit(inventory_surf,inventory_rect)
 
-    pygame.draw.rect(inventory_surf,(255, 255 , 0),inventory_rect)
+    
+    # pygame.draw.rect(inventory_surf,pygame.Color(255, 255 , 0),inventory_rect)
     player.updateInventory(screen,inventory_rect)
 
     
