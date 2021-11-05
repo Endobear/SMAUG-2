@@ -7,6 +7,8 @@ from Itens.Itens import Item
 
 from pygame import display
 
+from Salas.Quarto import Quarto
+
 pygame.init()
 screen = pygame.display.set_mode((854,480))
 pygame.display.set_caption('Paradox Dream')
@@ -14,7 +16,7 @@ clock = pygame.time.Clock()
 
 map = Mapa()
 player = Player()
-player.currentRoom = map.rooms[0]
+player.currentRoom = Quarto()
 debug_rects = False
 
 inventory_surf = pygame.Surface((854,50))
