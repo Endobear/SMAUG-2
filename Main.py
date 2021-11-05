@@ -41,6 +41,7 @@ while True:
                     for rect in background_rects:
                         if rect.collidepoint(event.pos):
                             print("clicou", rect)
+                            print(player.currentRoom)
                             player.currentRoom.ineractRect(rect,player)
 
                 

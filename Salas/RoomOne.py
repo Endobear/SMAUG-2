@@ -31,6 +31,7 @@ class RoomOne(Room):
     
     def upLocation(self):
         return self.roomOneCeiling
+        
     def frontLocation(self):
         if self.roomOneDoor.doorStatus == "Closed":
             return self.roomOneDoor
