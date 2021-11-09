@@ -19,8 +19,9 @@ player = Player()
 player.currentRoom = Quarto()
 debug_rects = False
 
-inventory_surf = pygame.Surface((854,50))
-inventory_rect = inventory_surf.get_rect(bottomleft = (20,0))
+inventory_surf = pygame.image.load("graphics/Inventario.png").convert_alpha() #pygame.Surface((854,50))
+inventory_surf = pygame.transform.scale(inventory_surf,(inventory_surf.get_width()/1.5,inventory_surf.get_height()/1.5))
+inventory_rect = inventory_surf.get_rect(bottomleft = (50,0))
 hover_inventory = False
 inventory_lerp = 0
 
@@ -106,8 +107,8 @@ while True:
     screen.blit(background_surf,(0,0))
     player.currentRoom.update(screen)
 
-    inventory_surf.fill(pygame.Color(0,0,255))
-    inventory_surf.set_alpha(123)
+    # inventory_surf.fill(pygame.Color(0,0,255))
+    # inventory_surf.set_alpha(123)
 
     screen.blit(inventory_surf,inventory_rect)
     screen.blit(inventory_icon_image,inventory_icon_rect)
@@ -130,7 +131,7 @@ while True:
 
     
 
-    inventory_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -50)
+    inventory_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -55)
     inventory_icon_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -65)
     
     if debug_rects:

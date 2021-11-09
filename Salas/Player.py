@@ -12,7 +12,8 @@ class Player():
         item.rect.center = (10,10)
         self.inventory.add(item)
 
-       
+    def change_room(self,room):
+        self.currentRoom = room
     
     def updateInventory(self,screen,rect):
         index = 0
