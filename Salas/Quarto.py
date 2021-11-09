@@ -1,46 +1,53 @@
 import pygame
 from Salas.Room import Room
-from Itens.Arrows import FrontArrow,BackArrow,UpArrow
+from Itens.Arrows import FrontArrow,BackArrow,UpArrow,DiagonalArrow
 
 class Quarto(Room):
     def __init__(self):
         super().__init__()
         self.room_name = "Quarto"
-        self.image = "graphics/Quarto.jpg"
+        self.image = "graphics/Cenario 1/Quarto_gaveta_fechada.png"
         self.exits = ["Up","Back"]
         self.exitsName = ["QuartoPorta"]
         
-        self.arrows = [BackArrow((380,366)),UpArrow((400,100))]
+        self.arrows = [BackArrow((420,450)),UpArrow((420,100))]
         
-        self.comoda = QuartoComoda(self)
+        self.gaveta = QuartoGaveta(self)
         self.quartoPorta = QuartoPorta(self)
         self.quartoTeto = QuartoTeto(self)
 
         self.id = "Quarto"
 
-        comoda_rect = pygame.Rect((355,327),(129,136))
-        self.interactives = [comoda_rect]
+        
 
     
     def backLocation(self):
         return self.quartoPorta
     def upLocation(self):
+        if len(self.interactives) < 1:
+            self.addRect(pygame.Rect((355,327),(129,136)))
         return self.quartoTeto
 
 
     def ineractRect(self,rect,player):
         super().ineractRect(rect,player)
         if rect == self.interactives[0]: # Cômoda do quarto
-            player.currentRoom = self.comoda
+            player.currentRoom = self.gaveta
+            self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
 
 
-class QuartoComoda(Room):
+class QuartoGaveta(Room):
     def __init__(self,quarto):
         super().__init__()
-        self.room_name = "QuartoComoda"
+        self.room_name = "QuartoGaveta"
         self.exits = ["Back"]
-        self.image = "graphics/Room1_closedDoor.png"
-    
+        self.arrows = [BackArrow((42,385))]
+        self.quarto = quarto
+        self.image = "graphics/Cenario 1/gaveta_gancho.png"
+
+    def backLocation(self):
+        return self.quarto
+
 
 
 class QuartoPorta(Room):
@@ -48,7 +55,7 @@ class QuartoPorta(Room):
         super().__init__()
         self.room_name = "QuartoPorta"
         self.exits = ["Back","Up"]
-        self.image = "graphics/Quarto_porta_fechada.png"
+        self.image = "graphics/Cenario 1/Quarto_porta_fechada.png"
         self.arrows = [BackArrow((486,431))]
         self.quarto = quarto
 
@@ -65,7 +72,13 @@ class QuartoTeto(Room):
         super().__init__()
         self.room_name = "QuartoTeto"
         self.exits = ["Back"]
-        self.image = "graphics/Quarto_teto.png"
+        self.arrows = [DiagonalArrow( (127,425), -90)]
+        self.image = "graphics/Cenario 1/Teto_gaveta_fechada.png"
+        self.quarto = quarto
+
+    def backLocation(self):
+        return self.quarto
+
 
         
 

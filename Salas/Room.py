@@ -37,6 +37,14 @@ class Room():
     def frontLocation(self):
         return 
 
+    #Adiciona novos retângulos interativos para o cenário
+    def addRect(self,rect):
+        self.interactives.append(rect)
+    def ArrowRect(self,arrow,location):
+        self.arrows.append(arrow)
+        self.exits.append(location)
+
+
     # Função que diz o que cada retângulo interagível faz
     def ineractRect(self,rect,player):
         if rect in [arrow.rect for arrow in self.arrows]:

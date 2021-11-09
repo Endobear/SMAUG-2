@@ -1,0 +1,5 @@
+- Mecânica de mensagem na tela 
+- pausa (Menu, Pausar o jogo)
+- Menu inicial do jogo
+- Mecânica do monstro nas salas(Estar em uma sala e se mexer)
+- Implementação do HUD do inventário
