@@ -20,9 +20,13 @@ player.currentRoom = Quarto()
 debug_rects = False
 
 inventory_surf = pygame.Surface((854,50))
-inventory_rect = inventory_surf.get_rect(bottomleft = (0,480))
+inventory_rect = inventory_surf.get_rect(bottomleft = (0,0))
 hover_inventory = False
 inventory_lerp = 0
+
+inventory_icon_image = pygame.image.load("graphics/InvIcon.png").convert_alpha()
+inventory_icon_image = pygame.transform.scale(inventory_icon_image,(inventory_icon_image.get_width()/3,inventory_icon_image.get_height()/3))
+inventory_icon_rect = inventory_icon_image.get_rect(topleft = (20,0))
 
 background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
 background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
@@ -81,7 +85,7 @@ while True:
         
         if event.type == pygame.MOUSEMOTION:
             
-            if event.pos[0] >= 0 and event.pos[1] >= 460 or inventory_rect.collidepoint(event.pos):
+            if inventory_icon_rect.collidepoint(event.pos) or inventory_rect.collidepoint(event.pos):
                 ##print("No Inventário")
                 hover_inventory = True
             else:
@@ -106,7 +110,7 @@ while True:
     inventory_surf.set_alpha(123)
 
     screen.blit(inventory_surf,inventory_rect)
-
+    screen.blit(inventory_icon_image,inventory_icon_rect)
     
     # pygame.draw.rect(inventory_surf,pygame.Color(255, 255 , 0),inventory_rect)
     player.updateInventory(screen,inventory_rect)
@@ -126,7 +130,7 @@ while True:
 
     
 
-    inventory_rect.y = (inventory_lerp*430)+ ((1-inventory_lerp)* 480)
+    inventory_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -50)
 
     
     if debug_rects:

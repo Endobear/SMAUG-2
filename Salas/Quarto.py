@@ -31,9 +31,10 @@ class Quarto(Room):
 
     def ineractRect(self,rect,player):
         super().ineractRect(rect,player)
-        if rect == self.interactives[0]: # Cômoda do quarto
-            player.currentRoom = self.gaveta
-            self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
+        if len(self.interactives) > 0:
+            if rect == self.interactives[0]: # Cômoda do quarto
+                player.currentRoom = self.gaveta
+                self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
 
 
 class QuartoGaveta(Room):
