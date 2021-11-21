@@ -1,5 +1,7 @@
 import pygame
 
+from Dialog_manager import Dialog_manager
+
 
 class Player():
     def __init__(self):
@@ -7,6 +9,8 @@ class Player():
        self.inventory = pygame.sprite.Group()
        self.hits = 0
        self.itemHolding = pygame.sprite.GroupSingle()
+       self.dialog_manager = Dialog_manager()
+       self.state = "default"
 
     def pickItem(self,item):
         item.rect.center = (10,10)
@@ -14,6 +18,16 @@ class Player():
 
     def change_room(self,room):
         self.currentRoom = room
+
+    def update(self,screen):
+        if (self.dialog_manager.dialog_key != ""):
+            self.state = "dialog"
+            screen.blit(self.dialog_manager.surface, self.dialog_manager.rect)
+        else:
+            self.state = "default"
+        
+        
+
     
     def updateInventory(self,screen,rect):
         index = 0

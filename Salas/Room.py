@@ -1,5 +1,6 @@
 import pygame
 
+
 class Room():
     # Inicialização da classe, definindo os parâmetros dela
     def __init__(self):

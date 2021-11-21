@@ -1,6 +1,7 @@
 import pygame
 from Salas.Room import Room
 from Itens.Arrows import FrontArrow,BackArrow,UpArrow,DiagonalArrow
+from Dialog_manager import Dialog_manager 
 
 class Quarto(Room):
     def __init__(self):
@@ -35,6 +36,7 @@ class Quarto(Room):
             if rect == self.interactives[0]: # Cômoda do quarto
                 player.currentRoom = self.gaveta
                 self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
+                self.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta_aberta.png"
 
 
 class QuartoGaveta(Room):
@@ -66,6 +68,13 @@ class QuartoPorta(Room):
         
     def backLocation(self):
         return self.quarto
+
+    def ineractRect(self,rect,player):
+        super().ineractRect(rect,player)
+        if len(self.interactives) > 0:
+            if rect == self.interactives[0]: # Porta
+                player.dialog_manager.set_dialog("interacao_porta")
+              
 
 
 class QuartoTeto(Room):

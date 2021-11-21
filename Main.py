@@ -32,6 +32,8 @@ inventory_icon_rect = inventory_icon_image.get_rect(topleft = (20,-65))
 background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
 background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
 
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -41,7 +43,10 @@ while True:
         if  event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
 
-                if player.itemHolding.sprites() == []:
+                if player.state == "dialog":
+                    player.dialog_manager.next_line()
+                
+                elif player.itemHolding.sprites() == []:
                     
                     for rect in background_rects:
                         if rect.collidepoint(event.pos):
@@ -53,6 +58,9 @@ while True:
                     for item in player.inventory.sprites():
                         if item.rect.collidepoint(event.pos):
                             player.itemHolding.add(item)
+                            
+                
+                    
                
                     
                     
@@ -115,6 +123,9 @@ while True:
     
     # pygame.draw.rect(inventory_surf,pygame.Color(255, 255 , 0),inventory_rect)
     player.updateInventory(screen,inventory_rect)
+    #TODO fazer update do inventário dentro do jogador, assim colocando a superfície de inventário dentro do jogador também
+
+    player.update(screen)
 
     
     if(hover_inventory):
