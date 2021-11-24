@@ -25,9 +25,9 @@ inventory_rect = inventory_surf.get_rect(bottomleft = (50,0))
 hover_inventory = False
 inventory_lerp = 0
 
-inventory_icon_image = pygame.image.load("graphics/InvIcon.png").convert_alpha()
-inventory_icon_image = pygame.transform.scale(inventory_icon_image,(inventory_icon_image.get_width()/3,inventory_icon_image.get_height()/3))
-inventory_icon_rect = inventory_icon_image.get_rect(topleft = (20,-65))
+# inventory_icon_image = pygame.image.load("graphics/InvIcon.png").convert_alpha()
+# inventory_icon_image = pygame.transform.scale(inventory_icon_image,(inventory_icon_image.get_width()/3,inventory_icon_image.get_height()/3))
+# inventory_icon_rect = inventory_icon_image.get_rect(topleft = (20,-65))
 
 background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
 background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
@@ -58,14 +58,6 @@ while True:
                     for item in player.inventory.sprites():
                         if item.rect.collidepoint(event.pos):
                             player.itemHolding.add(item)
-                            
-                
-                    
-               
-                    
-                    
-                    
-
 
         if  event.type == pygame.MOUSEBUTTONUP:
             if player.itemHolding.sprites() != []:
@@ -94,7 +86,7 @@ while True:
         
         if event.type == pygame.MOUSEMOTION:
             
-            if inventory_icon_rect.collidepoint(event.pos) or inventory_rect.collidepoint(event.pos):
+            if  inventory_rect.collidepoint(event.pos):
                 ##print("No Inventário")
                 hover_inventory = True
             else:
@@ -119,7 +111,7 @@ while True:
     # inventory_surf.set_alpha(123)
 
     screen.blit(inventory_surf,inventory_rect)
-    screen.blit(inventory_icon_image,inventory_icon_rect)
+    # screen.blit(inventory_icon_image,inventory_icon_rect)
     
     # pygame.draw.rect(inventory_surf,pygame.Color(255, 255 , 0),inventory_rect)
     player.updateInventory(screen,inventory_rect)
@@ -130,20 +122,20 @@ while True:
     
     if(hover_inventory):
         if inventory_lerp + 0.1 <1: 
-            inventory_lerp += 0.15
+            inventory_lerp += 0.10
         else: 
             inventory_lerp = 1
         
     else:
         if inventory_lerp - 0.1 > 0:
-            inventory_lerp -= 0.15
+            inventory_lerp -= 0.10
         else:
             inventory_lerp = 0
 
     
 
     inventory_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -55)
-    inventory_icon_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -65)
+    # inventory_icon_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -65)
     
     if debug_rects:
         for rect in background_rects:
