@@ -19,11 +19,6 @@ player = Player()
 player.currentRoom = Quarto()
 debug_rects = False
 
-inventory_surf = pygame.image.load("graphics/Inventario.png").convert_alpha() #pygame.Surface((854,50))
-inventory_surf = pygame.transform.scale(inventory_surf,(inventory_surf.get_width()/1.5,inventory_surf.get_height()/1.5))
-inventory_rect = inventory_surf.get_rect(bottomleft = (50,0))
-hover_inventory = False
-inventory_lerp = 0
 
 # inventory_icon_image = pygame.image.load("graphics/InvIcon.png").convert_alpha()
 # inventory_icon_image = pygame.transform.scale(inventory_icon_image,(inventory_icon_image.get_width()/3,inventory_icon_image.get_height()/3))
@@ -86,12 +81,12 @@ while True:
         
         if event.type == pygame.MOUSEMOTION:
             
-            if  inventory_rect.collidepoint(event.pos):
+            if  player.inventory_rect.collidepoint(event.pos):
                 ##print("No Inventário")
-                hover_inventory = True
+                player.hover_inventory = True
             else:
                 ##print("Fora do Inventário")
-                hover_inventory = False
+                player.hover_inventory = False
 
             if player.itemHolding.sprites() != []: 
                 
@@ -110,31 +105,31 @@ while True:
     # inventory_surf.fill(pygame.Color(0,0,255))
     # inventory_surf.set_alpha(123)
 
-    screen.blit(inventory_surf,inventory_rect)
+    # screen.blit(inventory_surf,inventory_rect)
     # screen.blit(inventory_icon_image,inventory_icon_rect)
     
     # pygame.draw.rect(inventory_surf,pygame.Color(255, 255 , 0),inventory_rect)
-    player.updateInventory(screen,inventory_rect)
-    #TODO fazer update do inventário dentro do jogador, assim colocando a superfície de inventário dentro do jogador também
+    # player.updateInventory(screen,inventory_rect)
+   
 
     player.update(screen)
 
     
-    if(hover_inventory):
-        if inventory_lerp + 0.1 <1: 
-            inventory_lerp += 0.10
-        else: 
-            inventory_lerp = 1
+    # if(hover_inventory):
+    #     if inventory_lerp + 0.1 <1: 
+    #         inventory_lerp += 0.10
+    #     else: 
+    #         inventory_lerp = 1
         
-    else:
-        if inventory_lerp - 0.1 > 0:
-            inventory_lerp -= 0.10
-        else:
-            inventory_lerp = 0
+    # else:
+    #     if inventory_lerp - 0.1 > 0:
+    #         inventory_lerp -= 0.10
+    #     else:
+    #         inventory_lerp = 0
 
     
 
-    inventory_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -55)
+    # inventory_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -55)
     # inventory_icon_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -65)
     
     if debug_rects:
