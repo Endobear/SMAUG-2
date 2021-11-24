@@ -11,7 +11,7 @@ class Quarto(Room):
         self.exits = ["Up","Back"]
         self.exitsName = ["QuartoPorta"]
         
-        self.arrows = [BackArrow((420,450)),UpArrow((420,100))]
+        self.arrows = [BackArrow((420,450))]
         
         self.gaveta = QuartoGaveta(self)
         self.quartoPorta = QuartoPorta(self)
@@ -74,6 +74,8 @@ class QuartoPorta(Room):
         if len(self.interactives) > 0:
             if rect == self.interactives[0]: # Porta
                 player.dialog_manager.set_dialog("interacao_porta")
+                if len(self.quarto.arrows) < 2:
+                    self.quarto.arrows.append(UpArrow((420,100)))
               
 
 
