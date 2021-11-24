@@ -7,21 +7,24 @@ from Itens.Arrows import UpArrow
 class Player():
     def __init__(self):
         self.currentRoom = ""
-        self.inventory = pygame.sprite.Group()
         self.hits = 0
         self.itemHolding = pygame.sprite.GroupSingle()
         self.dialog_manager = Dialog_manager()
         self.state = "default"
 
-            
+        self.inventory = pygame.sprite.Group()
         self.inventory_surf = pygame.image.load("graphics/Inventario.png").convert_alpha() #pygame.Surface((854,50))
         self.inventory_surf = pygame.transform.scale(self.inventory_surf,(self.inventory_surf.get_width()/1.5,self.inventory_surf.get_height()/1.5))
         self.inventory_rect = self.inventory_surf.get_rect(bottomleft = (50,0))
         self.hover_inventory = False
         self.inventory_lerp = 0
 
+        
+
+    #133
     def pickItem(self,item):
-        item.rect.center = (10,10)
+        item.image = item.icon
+        item.rect = item.icon.get_rect(center = (10,10))
         self.inventory.add(item)
 
     def change_room(self,room):
@@ -44,10 +47,10 @@ class Player():
         
         
         index = 0
-
+        inventory_slots = [(56,28),(112,28),(160,28),(210,28),(260,28)]
         for item in self.inventory.sprites():
             if self.itemHolding.has(item) == False:
-                item.rect.center = (rect.x + item.image.get_width(), rect.y + item.image.get_height())
+                item.rect.center = (rect.x + inventory_slots[index][0], rect.y + inventory_slots[index][1] )
                 # print(item.rect)
                 screen.blit(item.image,item.rect)
             else:
@@ -60,7 +63,7 @@ class Player():
             if self.inventory_lerp + 0.1 <1: 
                 self.inventory_lerp += 0.10
             else: 
-                inventory_lerp = 1
+                self.inventory_lerp = 1
         
         else:
             if self.inventory_lerp - 0.1 > 0:

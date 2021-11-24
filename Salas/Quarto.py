@@ -1,4 +1,5 @@
 import pygame
+from Itens.Itens import Screwdriver
 from Salas.Room import Room
 from Itens.Arrows import FrontArrow,BackArrow,UpArrow,DiagonalArrow
 from Dialog_manager import Dialog_manager 
@@ -47,6 +48,8 @@ class QuartoGaveta(Room):
         self.arrows = [BackArrow((42,385))]
         self.quarto = quarto
         self.image = "graphics/Cenario 1/gaveta_gancho.png"
+        self.itens.append(Screwdriver())
+        self.itens[0].rect.center = (587,358)
 
     def backLocation(self):
         return self.quarto
