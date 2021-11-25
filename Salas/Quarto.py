@@ -1,5 +1,5 @@
 import pygame
-from Itens.Itens import Screwdriver
+from Itens.Itens import KeyItem, Screwdriver
 from Salas.Room import Room
 from Itens.Arrows import FrontArrow,BackArrow,UpArrow,DiagonalArrow
 from Dialog_manager import Dialog_manager 
@@ -19,7 +19,9 @@ class Quarto(Room):
         self.quartoPorta = QuartoPorta(self)
         self.quartoTeto = QuartoTeto(self)
 
-        self.interactives["cama"] = pygame.Rect((505,230),(349,250))
+        self.interactives = {"cama": pygame.Rect((505,230),(349,250)), 
+                             "armario": pygame.Rect((78,46),(251,417)),
+                             "comoda": pygame.Rect((355,327),(129,136))}
 
         self.id = "Quarto"
 
@@ -31,8 +33,8 @@ class Quarto(Room):
     def backLocation(self):
         return self.quartoPorta
     def upLocation(self):
-        if not("comoda" in self.interactives):
-            self.addRect(pygame.Rect((355,327),(129,136)), "comoda")
+        # if not("comoda" in self.interactives):
+        #      self.addRect(pygame.Rect((355,327),(129,136)), "comoda")
         return self.quartoTeto
 
 
@@ -40,13 +42,21 @@ class Quarto(Room):
         super().ineractRect(rect,player)
         
 
-        if "comoda" in self.interactives and rect == self.interactives["comoda"]: # Cômoda do quarto
-            player.currentRoom = self.gaveta
-            self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
-            self.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta_aberta.png"
+        if rect == self.interactives["comoda"]: # Cômoda do quarto
+            
+            if not self.quartoTeto.firstTime:
+                player.change_room(self.gaveta)
+                self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
+                self.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta_aberta.png"
+                self.quartoTeto.gaveta_open = True
+            else:
+                player.dialog_manager.set_dialog("interacao_comoda")
 
         if rect == self.interactives["cama"]:
             player.dialog_manager.set_dialog("interacao_cama")
+
+        if rect == self.interactives["armario"]:
+            player.dialog_manager.set_dialog("interacao_armario")
 
     def update(self, screen):
         
@@ -64,13 +74,34 @@ class QuartoGaveta(Room):
         self.arrows = [BackArrow((42,385))]
         self.quarto = quarto
         self.image = "graphics/Cenario 1/gaveta_gancho.png"
+        self.gancho_breakable = False
+        self.gancho = True
+        
+        self.interactives = {"gancho": pygame.Rect((510,157),(147,69))}
+        
         
 
     def backLocation(self):
         return self.quarto
 
 
+    def ineractRect(self,rect,player):
+        super().ineractRect(rect,player)
+        if rect == self.interactives["gancho"]: # Porta
+            if self.gancho_breakable and self.gancho:
+                self.gancho = False
+                self.image = "graphics/Cenario 1/gaveta.png"
+                self.quarto.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta.png"
+                chave = KeyItem();
+                chave.set_position((200,200))
+                self.quarto.itens.append(chave)
+            elif self.gancho:
+                player.dialog_manager.set_dialog("interacao_gancho")
+                
+        
+       
 
+    
 class QuartoPorta(Room):
     def __init__(self,quarto):
         super().__init__()
@@ -94,7 +125,12 @@ class QuartoPorta(Room):
             if len(self.quarto.arrows) < 2:
                 self.quarto.arrows.append(UpArrow((420,100)))
               
-
+    def update(self, screen):
+    
+        if self.quarto.tutorial_phase == 1:
+            self.quarto.map.player.dialog_manager.set_dialog("tutorial_dialog_1", color = (102, 250, 245))
+            self.quarto.tutorial_phase = 2
+        return super().update(screen)
 
 class QuartoTeto(Room):
     def __init__(self,quarto):
@@ -104,9 +140,33 @@ class QuartoTeto(Room):
         self.arrows = [DiagonalArrow( (127,425), -90)]
         self.image = "graphics/Cenario 1/Teto_gaveta_fechada.png"
         self.quarto = quarto
+        self.firstTime = True
+        self.gaveta_open = False
+        
+        self.interactives = {"gaveta": pygame.Rect((411,29),(112,120))}
 
     def backLocation(self):
         return self.quarto
+
+    def update(self, screen):
+    
+        if self.firstTime:
+            self.quarto.map.player.dialog_manager.set_dialog("FirstTime_QuartoTeto")
+            self.firstTime = False
+            
+        elif self.quarto.tutorial_phase == 2:
+            self.quarto.map.player.dialog_manager.set_dialog("FirstTime_QuartoTeto")
+            self.quarto.tutorial_phase = 3
+        return super().update(screen)
+
+    def ineractRect(self,rect,player):
+        super().ineractRect(rect,player)
+        if rect == self.interactives["gaveta"] and self.gaveta_open and self.quarto.gaveta.gancho: 
+            self.quarto.map.player.dialog_manager.set_dialog("interacao_gaveta")
+            self.quarto.gaveta.gancho_breakable = True
+            
+           
+    
 
 
         

@@ -7,6 +7,7 @@ class Dialog_manager():
         self.dialog_text = [""]
         self.dialog_key = ""
         self.current_line = 0
+        self.color = (255,255,255)
         font = pygame.font.match_font("arial")
         self.font = pygame.font.Font(font,20)
         self.surface = self.font.render(self.dialog_text[self.current_line],False,(255,255,255))
@@ -33,23 +34,25 @@ class Dialog_manager():
         self.dialog_text = texto
         self.current_line = 0
         
-        color = (255,255,255)
         if "color" in karg: 
-            color = karg["color"] 
-        self.surface = self.font.render(self.dialog_text[self.current_line],False,color)
+            self.color = karg["color"] 
+        self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
         self.rect = self.surface.get_rect(center = (427,240))
 
        
-    def next_line(self):
+    def next_line(self, **karg):
+        
+       
         
         if self.current_line+1 < len(self.dialog_text):
             self.current_line += 1
-            self.surface = self.font.render(self.dialog_text[self.current_line],False,(255,255,255))
+            self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
             self.rect = self.surface.get_rect(center = (427,240))
 
         else:
             self.dialog_text = [""]
             self.dialog_key = ""
             self.current_line = 0
-            self.surface = self.font.render(self.dialog_text[self.current_line],False,(255,255,255))
+            self.color = (255,255,255)
+            self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
             self.rect = self.surface.get_rect(center = (427,240))

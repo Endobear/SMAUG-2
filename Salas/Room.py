@@ -53,7 +53,7 @@ class Room():
         if rect in [arrow.rect for arrow in self.arrows]:
             for arrow in self.arrows:
                 if rect == arrow.rect: 
-                    player.currentRoom = self.getLocationFromDirection(arrow.locationName)
+                    player.change_room(self.getLocationFromDirection(arrow.locationName))
 
         if rect in [item.rect for item in self.itens]:
             index = 0

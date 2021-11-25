@@ -8,6 +8,9 @@ class Item(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.type = "NONE"
 
+    def set_position(self,position):
+        self.rect = self.image.get_rect(center = position)
+
         
 
 class KeyItem(Item):
