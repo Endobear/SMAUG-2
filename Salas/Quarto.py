@@ -110,6 +110,7 @@ class QuartoPorta(Room):
         self.image = "graphics/Cenario 1/Quarto_porta_fechada.png"
         self.arrows = [BackArrow((486,431))]
         self.quarto = quarto
+        self.door_status = False
 
 
         porta_rect = pygame.Rect((409,103),(165,314))
@@ -121,9 +122,12 @@ class QuartoPorta(Room):
     def ineractRect(self,rect,player):
         super().ineractRect(rect,player)
         if rect == self.interactives["porta"]: # Porta
-            player.dialog_manager.set_dialog("interacao_porta")
-            if len(self.quarto.arrows) < 2:
-                self.quarto.arrows.append(UpArrow((420,100)))
+            if not self.door_status:
+                player.dialog_manager.set_dialog("interacao_porta")
+                if len(self.quarto.arrows) < 2:
+                    self.quarto.arrows.append(UpArrow((420,100)))
+            else:
+                self.quarto.RoomExitClassFromMap(self.quarto.map,self.exitsName[0])
               
     def update(self, screen):
     
@@ -131,6 +135,16 @@ class QuartoPorta(Room):
             self.quarto.map.player.dialog_manager.set_dialog("tutorial_dialog_1", color = (102, 250, 245))
             self.quarto.tutorial_phase = 2
         return super().update(screen)
+
+    def useItem(self, rect, player):
+        itemHolding = player.itemHolding.sprites()[0]
+        if rect in [interactives for interactives in self.interactives.values()]:
+            if rect == self.interactives["porta"] and itemHolding.type == KeyItem().type:
+                print("abriu")
+                player.inventory.remove(itemHolding)
+                self.door_status = True
+                self.image = "graphics/Cenario 1/Quarto_porta_aberta.png"
+
 
 class QuartoTeto(Room):
     def __init__(self,quarto):
@@ -164,11 +178,3 @@ class QuartoTeto(Room):
         if rect == self.interactives["gaveta"] and self.gaveta_open and self.quarto.gaveta.gancho: 
             self.quarto.map.player.dialog_manager.set_dialog("interacao_gaveta")
             self.quarto.gaveta.gancho_breakable = True
-            
-           
-    
-
-
-        
-
-        
