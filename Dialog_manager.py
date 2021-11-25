@@ -11,12 +11,13 @@ class Dialog_manager():
         self.font = pygame.font.Font(font,20)
         self.surface = self.font.render(self.dialog_text[self.current_line],False,(255,255,255))
         self.rect = self.surface.get_rect()
+
         
 
     def show_dialogue(self):
         pass
 
-    def set_dialog(self, dialogKey):
+    def set_dialog(self, dialogKey, **karg):
         file = open("Dialogues/"+ dialogKey +".json", mode="r", encoding="utf-8")
        
 
@@ -32,7 +33,10 @@ class Dialog_manager():
         self.dialog_text = texto
         self.current_line = 0
         
-        self.surface = self.font.render(self.dialog_text[self.current_line],False,(255,255,255))
+        color = (255,255,255)
+        if "color" in karg: 
+            color = karg["color"] 
+        self.surface = self.font.render(self.dialog_text[self.current_line],False,color)
         self.rect = self.surface.get_rect(center = (427,240))
 
        

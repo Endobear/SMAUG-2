@@ -34,9 +34,11 @@ class Player():
         screen.blit(self.inventory_surf,self.inventory_rect)
         self.updateInventory(screen,self.inventory_rect)
         
+        #TODO Fazer o diálogo aumentar e diminuir a opacidade ao invés de só aparecer
         if (self.dialog_manager.dialog_key != ""):
             self.state = "dialog"
             screen.blit(self.dialog_manager.surface, self.dialog_manager.rect)
+            
         else:
             self.state = "default"
         

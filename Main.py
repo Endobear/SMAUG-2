@@ -15,7 +15,9 @@ clock = pygame.time.Clock()
 
 map = Mapa()
 player = Player()
-player.currentRoom = Quarto()
+map.player = player
+player.currentRoom = map.rooms[0]
+
 debug_rects = False
 
 
@@ -137,6 +139,7 @@ while True:
     # inventory_icon_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -65)
     
     if debug_rects:
+       
         for rect in background_rects:
             pygame.draw.rect(screen,(255, 0 , 0),rect)
 

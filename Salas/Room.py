@@ -8,14 +8,14 @@ class Room():
         self.room_description = "" # descrição da sala
         self.exits = [] # Listas de saídas para outras salas, String
         self.image = "" #Imagem da sala, ficará no background
-        self.interactives = [] # Lista de retângulos que o Player pode clicar, não incluir itens e setas
+        self.interactives = {} # Dicionário de retângulos que o Player pode clicar, não incluir itens e setas
         self.id = ""
         self.itens = []
         self.itens_sprites = pygame.sprite.Group(item for item in self.itens)
         self.arrows = []
         self.ArrowSprites = pygame.sprite.Group(arrow for arrow in self.arrows)
 
-        self.room_rects = self.arrows  + self.itens+ self.interactives
+        self.room_rects = [arrow.rect for arrow in self.arrows]  + [item.rect for item in self.itens] + [interactives for interactives in self.interactives.values()]
 
    
     # Função que pega uma direção em string e chama a função com a classe da sala daquela direção
@@ -39,8 +39,10 @@ class Room():
         return 
 
     #Adiciona novos retângulos interativos para o cenário
-    def addRect(self,rect):
-        self.interactives.append(rect)
+    def addRect(self,rect, name):
+        self.interactives[name] = rect
+
+
     def ArrowRect(self,arrow,location):
         self.arrows.append(arrow)
         self.exits.append(location)
@@ -75,7 +77,7 @@ class Room():
         self.itens_sprites.draw(screen)
         self.itens_sprites.add(item for item in self.itens)
         self.ArrowSprites.add(arrow for arrow in self.arrows)
-        self.room_rects = [arrow.rect for arrow in self.arrows]  + [item.rect for item in self.itens] + self.interactives
+        self.room_rects = [arrow.rect for arrow in self.arrows]  + [item.rect for item in self.itens] + [interactives for interactives in self.interactives.values()]
         
         
 
