@@ -31,127 +31,101 @@ def eventos():
             if event.key == K_ESCAPE:
                 menu_selecao += 10
 
-    def selecao():
 
-        global menu_selecao, botao_enter
+def selecao():
+    global menu_selecao, botao_enter
 
-        if menu_selecao == 1:
-            screen.fill((0, 0, 0))
+    if menu_selecao == 1:
+        screen.fill((0, 0, 0))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            novo_jogo = fonte.render('>> Novo jogo <<', True, (80, 80, 80))
-            screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        novo_jogo = fonte.render('>> Novo jogo <<', True, (80, 80, 80))
+        screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            carregar_jogo = fonte.render(' Carregar jogo ', True, (80, 80, 80))
-            screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        carregar_jogo = fonte.render(' Carregar jogo ', True, (80, 80, 80))
+        screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            configuracoes = fonte.render(' Configurações ', True, (80, 80, 80))
-            screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        configuracoes = fonte.render(' Configurações ', True, (80, 80, 80))
+        screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            sair = fonte.render(' Sair ', True, (80, 80, 80))
-            screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        sair = fonte.render(' Sair ', True, (80, 80, 80))
+        screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
 
-        if menu_selecao == 2:
+    if menu_selecao == 2:
+        screen.fill([0, 0, 0])
 
-            screen.fill([0, 0, 0])
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        novo_jogo = fonte.render(' Novo jogo ', True, (80, 80, 80))
+        screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            novo_jogo = fonte.render(' Novo jogo ', True, (80, 80, 80))
-            screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        carregar_jogo = fonte.render('>> Carregar jogo <<', True, (80, 80, 80))
+        screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            carregar_jogo = fonte.render('>> Carregar jogo <<', True, (80, 80, 80))
-            screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        configuracoes = fonte.render(' Configurações ', True, (80, 80, 80))
+        screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            configuracoes = fonte.render(' Configurações ', True, (80, 80, 80))
-            screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        sair = fonte.render(' Sair ', True, (80, 80, 80))
+        screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            sair = fonte.render(' Sair ', True, (80, 80, 80))
-            screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
+    if menu_selecao == 3:
+        screen.fill([0, 0, 0])
 
-            if menu_selecao == 3:
-                screen.fill([0, 0, 0])
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        novo_jogo = fonte.render(' Novo jogo ', True, (80, 80, 80))
+        screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            novo_jogo = fonte.render(' Novo jogo ', True, (80, 80, 80))
-            screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        carregar_jogo = fonte.render(' Carregar jogo ', True, (80, 80, 80))
+        screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            carregar_jogo = fonte.render(' Carregar jogo ', True, (80, 80, 80))
-            screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        configuracoes = fonte.render('>> Configurações <<', True, (80, 80, 80))
+        screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            configuracoes = fonte.render('>> Configurações <<', True, (80, 80, 80))
-            screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        sair = fonte.render(' Sair ', True, (80, 80, 80))
+        screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
 
+    if menu_selecao == 4:
+        screen.fill([0, 0, 0])
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            sair = fonte.render(' Sair ', True, (80, 80, 80))
-            screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        novo_jogo = fonte.render(' Novo jogo ', True, (80, 80, 80))
+        screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
 
-            if menu_selecao == 4:
-                screen.fill([0, 0, 0])
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        carregar_jogo = fonte.render(' Carregar jogo ', True, (80, 80, 80))
+        screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            novo_jogo = fonte.render(' Novo jogo ', True, (80, 80, 80))
-            screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        configuracoes = fonte.render(' Configurações ', True, (80, 80, 80))
+        screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            carregar_jogo = fonte.render(' Carregar jogo ', True, (80, 80, 80))
-            screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
+        fonte = pygame.font.SysFont('arial', 20, False, False)
+        sair = fonte.render('>> Sair <<', True, (80, 80, 80))
+        screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            configuracoes = fonte.render(' Configurações ', True, (80, 80, 80))
-            screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
+    if menu_selecao == 5:
+        menu_selecao = 4
 
+    if menu_selecao == 0:
+        menu_selecao = 1
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            sair = fonte.render(' Sair ', True, (80, 80, 80))
-            screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
+    if menu_selecao == 14:
+        pygame.quit()
+        exit()
 
-        if menu_selecao == 5:
-            screen.fill([0, 0, 0])
+while True:
+    clock.tick(FPS)
+    eventos()
+    selecao()
+    print(botao_enter)
+    print(menu_selecao)
 
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            novo_jogo = fonte.render(' Novo jogo ', True, (80, 80, 80))
-            screen.blit(novo_jogo, ((WIDTH / 2) - 55, (HEIGHT / 2)))
-
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            carregar_jogo = fonte.render(' Carregar jogo ', True, (80, 80, 80))
-            screen.blit(carregar_jogo, ((WIDTH / 2) - 50, (HEIGHT / 2) + 22))
-
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            configuracoes = fonte.render(' Configurações ', True, (80, 80, 80))
-            screen.blit(configuracoes, ((WIDTH / 2) - 50, (HEIGHT / 2) + 44))
-
-            fonte = pygame.font.SysFont('arial', 20, False, False)
-            sair = fonte.render('>> Sair <<', True, (80, 80, 80))
-            screen.blit(sair, ((WIDTH / 2) - 15, (HEIGHT / 2) + 88))
-
-        if menu_selecao == 6:
-            menu_selecao = 5
-
-        if menu_selecao == 0:
-            menu_selecao = 1
-
-        if menu_selecao == 14:
-            pygame.quit()
-            exit()
-
-
-        while True:
-            print(botao_enter)
-            print(menu_selecao)
-
-            clock.tick(FPS)
-            eventos()
-            selecao()
-
-            pygame.display.set_mode([800, 500])
-
-            pygame.display.update()
+    pygame.display.update()
