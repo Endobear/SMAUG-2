@@ -1,8 +1,7 @@
 import pygame
-from Itens.Itens import KeyItem, Screwdriver
+from Itens.Itens import KeyItem
 from Salas.Room import Room
-from Itens.Arrows import FrontArrow,BackArrow,UpArrow,DiagonalArrow
-from Dialog_manager import Dialog_manager 
+from Itens.Arrows import BackArrow,UpArrow,DiagonalArrow
 
 class Quarto(Room):
     def __init__(self,map):
@@ -127,7 +126,7 @@ class QuartoPorta(Room):
                 if len(self.quarto.arrows) < 2:
                     self.quarto.arrows.append(UpArrow((420,100)))
             else:
-                self.quarto.RoomExitClassFromMap(self.quarto.map,self.exitsName[0])
+                player.change_room(self.quarto.RoomExitClassFromMap(self.quarto.map,self.quarto.exitsName[0]))
               
     def update(self, screen):
     

@@ -1,8 +1,8 @@
 from Salas.CasaCorredor import CasaCorredor
 from Salas.Player import Player
 from Salas.Quarto import Quarto
-from Salas.RoomOne import RoomOne
-from Salas.RoomTwo import RoomTwo
+# from Salas.RoomOne import RoomOne
+# from Salas.RoomTwo import RoomTwo
 
 class Mapa():
     def __init__(self):
@@ -12,7 +12,7 @@ class Mapa():
         self.player = Player()
         self.exitsList = {
             "Quarto":{"QuartoPorta": self.rooms[1]},
-            "RoomTwo": {"BackDoor":self.rooms[0], "FrontDoor":"RoomThree"}
+            "CasaCorredor": {"CorredorSaida":self.rooms[0].quartoPorta}
         }
         # self.rooms = [RoomOne(self),RoomTwo(self)]
         # self.exitsList = {
