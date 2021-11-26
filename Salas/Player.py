@@ -25,6 +25,9 @@ class Player():
     def pickItem(self,item):
         item.image = item.icon
         item.rect = item.icon.get_rect(center = (10,10))
+
+        if item.dialog != "":
+            self.dialog_manager.set_dialog(item.dialog, color = item.dialog_color, overwrite = True)
         self.inventory.add(item)
 
     def change_room(self,room):

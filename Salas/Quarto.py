@@ -91,7 +91,7 @@ class QuartoGaveta(Room):
                 self.gancho = False
                 self.image = "graphics/Cenario 1/gaveta.png"
                 self.quarto.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta.png"
-                chave = KeyItem();
+                chave = KeyItem(dialog = "item_tutorial", dialog_color = (102, 250, 245));
                 chave.set_position((200,200))
                 self.quarto.itens.append(chave)
             elif self.gancho:

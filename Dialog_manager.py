@@ -19,25 +19,27 @@ class Dialog_manager():
         pass
 
     def set_dialog(self, dialogKey, **karg):
-        file = open("Dialogues/"+ dialogKey +".json", mode="r", encoding="utf-8")
-       
-
-        texto = json.load(file)
-        texto = texto["text"] #transformando dicioário em uma lista para ordernar as linhas de diálogo.
-
-        file.close()
-
-        print(texto)
-        print(len(texto))
-
-        self.dialog_key = dialogKey
-        self.dialog_text = texto
-        self.current_line = 0
         
-        if "color" in karg: 
-            self.color = karg["color"] 
-        self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
-        self.rect = self.surface.get_rect(center = (427,240))
+        if self.dialog_key == "" or "overwrite" in karg:
+            file = open("Dialogues/"+ dialogKey +".json", mode="r", encoding="utf-8")
+        
+
+            texto = json.load(file)
+            texto = texto["text"] #transformando dicioário em uma lista para ordernar as linhas de diálogo.
+
+            file.close()
+
+            print(texto)
+            print(len(texto))
+
+            self.dialog_key = dialogKey
+            self.dialog_text = texto
+            self.current_line = 0
+            
+            if "color" in karg: 
+                self.color = karg["color"] 
+            self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
+            self.rect = self.surface.get_rect(center = (427,240))
 
        
     def next_line(self, **karg):
