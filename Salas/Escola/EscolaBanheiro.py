@@ -134,11 +134,7 @@ class BanheiroTeto(Room):
 
 
 
-    # def ineractRect(self, rect, player):
-    #     super().ineractRect(rect, player)
-    #     if rect == self.interactives["cabineDestrancada"]:
-    #         if self.porta_cabine == False:
-    #             self.image = "graphics/Cenario 4/Banheiro_cabine_fechada.png"
-    #             self.porta_cabine = True
-    #         else:
-    #             pass
+    def ineractRect(self, rect, player):
+        super().ineractRect(rect, player)
+        if rect == self.interactives["duto"] and self.duto_status:
+            player.change_room(self.banheiroCabines.banheiro.RoomExitClassFromMap(self.banheiroCabines.banheiro.map,self.banheiroCabines.banheiro.exitsName[0]))
