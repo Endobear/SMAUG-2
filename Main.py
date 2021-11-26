@@ -4,11 +4,6 @@ from Salas.Player import Player
 from Mapa import Mapa
 from sys import exit
 
-from Itens.Itens import KeyItem
-
-from pygame import display
-
-from Salas.Quarto import Quarto
 
 pygame.init()
 screen = pygame.display.set_mode((854,480))
@@ -18,7 +13,7 @@ clock = pygame.time.Clock()
 map = Mapa()
 player = Player()
 map.player = player
-player.currentRoom = map.rooms[0]
+player.currentRoom = map.rooms[3]
 
 debug_rects = False
 

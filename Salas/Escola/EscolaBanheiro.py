@@ -36,7 +36,7 @@ class BanheiroCabines(Room):
     def __init__(self,banheiro):
         super().__init__()
         self.room_name = "BanheiroCabine"
-        self.image = "graphics/Cenario 4/espelho.png"
+        self.image = "graphics/Cenario 4/Banheiro_cabine_fechada.png"
         self.exits = ["Back"]
         self.banheiro = banheiro
 
@@ -50,7 +50,7 @@ class BanheiroCabines(Room):
     
     def backLocation(self):
 
-        return self.sala
+        return self.banheiro
     
     # def ineractRect(self, rect, player):
     #     super().ineractRect(rect, player)
