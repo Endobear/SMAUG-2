@@ -2,6 +2,7 @@ import pygame
 from Salas.Room import Room
 
 from Itens.Arrows import BackArrow
+from Itens.Itens import Screwdriver
 
 class EscolaBanheiro(Room):
     def __init__(self,map):
@@ -15,7 +16,8 @@ class EscolaBanheiro(Room):
 
         self.arrows = [BackArrow((420,450))]
 
-        self.interactives = {"porta": pygame.Rect((153,89),(186,133))}
+        self.interactives = {"porta": pygame.Rect((382,91),(158,298)),
+                             "screwdriver": pygame.Rect((268,384),(48,17))}
         
 
         self.id = "EscolaBanheiro"
@@ -26,8 +28,12 @@ class EscolaBanheiro(Room):
     
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
-        # if rect == self.interactives["porta"]:
-        #     player.change_room(self.espelho)
+        if "screwdriver" in self.interactives and rect == self.interactives["screwdriver"]:
+            self.image = "graphics/Cenario 4/Banheiro_Porta.png"
+            self.interactives.pop("screwdriver")
+            player.pickItem(Screwdriver())
+        if rect == self.interactives["porta"]:
+            player.change_room(self.espelho)
 
 
 
