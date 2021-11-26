@@ -67,10 +67,9 @@ while True:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                if debug_rects:
-                    debug_rects = False
-                else:
-                    debug_rects = True
+                
+                debug_rects = not debug_rects
+                
             if event.key == pygame.K_c:
                 print(background_rects)
 
@@ -134,7 +133,7 @@ while True:
 
     # inventory_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -55)
     # inventory_icon_rect.y = (inventory_lerp*0)+ ((1-inventory_lerp)* -65)
-    
+
     if debug_rects:
        
         for rect in background_rects:
@@ -142,6 +141,6 @@ while True:
 
     
 
-
+    
     pygame.display.update()
     clock.tick(60)
