@@ -129,6 +129,7 @@ class BanheiroTeto(Room):
         if rect in [interactives for interactives in self.interactives.values()]:
             if rect == self.interactives["duto"] and itemHolding.type == Screwdriver().type:
                 self.image = "graphics/Cenario 4/Duto_aberto.png"
+                self.banheiroCabines.image = "graphics/Cenario 4/Cabine_carrinho_duto.png"
                 self.duto_status = True
 
 
