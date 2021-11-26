@@ -69,7 +69,7 @@ class Room():
         pass
 
     def RoomExitClassFromMap(self,mapa,exit):
-        return mapa.exitsList[self.id].get(exit)
+        return mapa.exitsList[self.id][exit]
 
     def update(self,screen):
         # print(self.itens_sprites)
