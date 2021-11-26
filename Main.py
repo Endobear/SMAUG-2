@@ -4,6 +4,8 @@ from Salas.Player import Player
 from Mapa import Mapa
 from sys import exit
 
+from Itens.Itens import KeyItem
+
 from pygame import display
 
 from Salas.Quarto import Quarto
@@ -28,7 +30,7 @@ debug_rects = False
 background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
 background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
 
-# player.pickItem(Screwdriver())
+# player.pickItem(KeyItem())
 # player.pickItem(Screwdriver())
 # player.pickItem(Screwdriver())
 # player.pickItem(Screwdriver())
