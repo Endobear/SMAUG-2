@@ -47,7 +47,11 @@ class Quarto(Room):
                 player.change_room(self.gaveta)
                 self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
                 self.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta_aberta.png"
-                self.quartoTeto.gaveta_open = True
+                
+                if not self.quartoTeto.gaveta_open:
+                    self.quartoTeto.gaveta_open = True
+                    self.sound_effects.load("audio/Sound Effects/gaveta_abrindo.mp3")
+                    self.sound_effects.play()
             else:
                 player.dialog_manager.set_dialog("interacao_comoda")
 

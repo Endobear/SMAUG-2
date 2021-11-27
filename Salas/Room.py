@@ -1,6 +1,8 @@
 import pygame
 
 
+
+
 class Room():
     # Inicialização da classe, definindo os parâmetros dela
     def __init__(self):
@@ -14,6 +16,8 @@ class Room():
         self.itens_sprites = pygame.sprite.Group(item for item in self.itens)
         self.arrows = []
         self.ArrowSprites = pygame.sprite.Group(arrow for arrow in self.arrows)
+
+        self.sound_effects= pygame.mixer.music;
 
         self.room_rects = [arrow.rect for arrow in self.arrows]  + [item.rect for item in self.itens] + [interactives for interactives in self.interactives.values()]
 
