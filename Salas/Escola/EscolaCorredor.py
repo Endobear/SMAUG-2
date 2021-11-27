@@ -40,7 +40,7 @@ class EscolaCorredor2(Room):
     def __init__(self,corredor1):
         super().__init__()
         self.room_name = "EscolaCorredor2"
-        self.image = "graphics/Cenario 5/Corredor_diretoria.png"
+        self.image = "graphics/Cenario 5/Corredor_diretoria_fechada.png"
         self.exits = ["Back"]
         self.corredor1 = corredor1
         self.porta_cabine = False
