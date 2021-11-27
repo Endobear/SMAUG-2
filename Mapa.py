@@ -14,6 +14,9 @@ class Mapa():
         escola = [EscolaBanheiro(self),EscolaCorredor1(self)]
         self.rooms = casa + escola
         self.player = Player()
+        self.monstro = Monstro(self.rooms[3])
+
+
         self.exitsList = {
             "Quarto":{"QuartoPorta": self.rooms[1]},
             "CasaCorredor": {"CorredorQuarto":self.rooms[0].quartoPorta, "CorredorSala": self.rooms[2]},
@@ -33,7 +36,13 @@ class Mapa():
         self.exitsList[room][exit] = newExit
     
     def update():
-
+        
         pass
     
-    
+
+class Monstro():
+    def __init__(self,room) -> None:
+        self.room = room
+        self.image = "graphics/Monstro/Parado.png"
+        self.chasing = False
+        self.spawnabble = False

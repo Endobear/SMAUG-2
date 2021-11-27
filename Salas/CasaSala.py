@@ -17,6 +17,8 @@ class CasaSala(Room):
 
         self.interactives = {"espelho": pygame.Rect((153,89),(186,133))}
         
+        self.monsterSpawnabble = False
+        self.monsterLocation = [(240,500)]
 
         self.id = "CasaSala"
     
