@@ -42,8 +42,9 @@ class Mapa():
     def update(self,screen):
         if self.player.currentRoom == self.monstro.room and self.player.currentRoom.monsterSpawnabble == True:
             print("I'm here")
+            
             if self.music_player.get_pos() < 0:
-                
+                self.music_player.load("audio/Music/Tenssion.mp3")
                 self.music_player.play(loops = -1)
 
             screen.blit(self.monstro.surface, self.monstro.rect)
@@ -61,7 +62,7 @@ class Monstro():
     def spawn(self,room,map):
         self.surface = pygame.transform.scale(pygame.image.load(self.image).convert_alpha(), (room.monsterLocation["width"], room.monsterLocation["height"]))
         self.rect = self.surface.get_rect(center = self.room.monsterLocation["position"])   
-        map.music_player.load("audio/Music/Tenssion.mp3")
+        
         
 
 

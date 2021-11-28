@@ -50,8 +50,7 @@ class Quarto(Room):
                 
                 if not self.quartoTeto.gaveta_open:
                     self.quartoTeto.gaveta_open = True
-                    self.sound_effects.load("audio/Sound Effects/gaveta_abrindo.mp3")
-                    self.sound_effects.play()
+                    pygame.mixer.Sound("audio/Sound Effects/gaveta_abrindo.mp3").play()
             else:
                 player.dialog_manager.set_dialog("interacao_comoda")
 
