@@ -30,10 +30,11 @@ class Mapa():
             "CasaCorredor": {"CorredorQuarto":self.rooms[0].quartoPorta, "CorredorSala": self.rooms[2]},
             "CasaSala": {"CasaSalaSaida": self.rooms[1]},
             "EscolaBanheiro": {"Ventilacao": self.rooms[4]},
-            "EscolaCorredor1":{"Banheiro": self.rooms[3], "Sala05": self.rooms[5], "Sala01" : self.rooms[7]},
+            "EscolaCorredor1":{"Banheiro": self.rooms[3], "Sala05": self.rooms[5], "Sala01" : self.rooms[7], "Enfermaria": self.rooms[8]},
             "Sala05": {"Porta": self.rooms[4].corredor2, "Duto" : self.rooms[6]},
             "Duto": {"Entrance": self.rooms[5], "Exit": self.rooms[6]},
-            "Sala01": {"Porta" : self.rooms[4]}
+            "Sala01": {"Porta" : self.rooms[4]},
+            "EscolaEnfermaria": {"Porta": self.rooms[4].corredor2}
         }
         # self.rooms = [RoomOne(self),RoomTwo(self)]
         # self.exitsList = {

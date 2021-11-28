@@ -43,11 +43,13 @@ class EscolaCorredor2(Room):
         self.exits = ["Back"]
         self.corredor1 = corredor1
         self.porta_sala = False
+        self.enfermaria = False
 
         self.arrows = [BackArrow((420,450))]
 
         self.interactives = {"portaSala": pygame.Rect((314,203),(27,94)),
-                             "PortaDiretoria": pygame.Rect((411,220),(30,32))}
+                             "PortaDiretoria": pygame.Rect((411,220),(30,32)),
+                             "PortaEnfermaria": pygame.Rect((629,153),(79,239))}
         
         self.portaDiretoria = EscolaPortaDiretoria(self)
 
@@ -64,10 +66,18 @@ class EscolaCorredor2(Room):
             if self.porta_sala == False: 
                 self.image = "graphics/Cenario 5/Corredor_diretoria_aberta.png"
                 self.porta_sala = True
+                sala05 = self.corredor1.map.getRoomById("Sala05")
+
+                sala05.porta = True
+                sala05.image = "graphics/Cenario 6/Sala05_porta_"+ str(sala05.porta) +"_duto_"+ str(sala05.duto.duto_status) + ".png"
+
             else:
                 player.change_room(self.corredor1.RoomExitClassFromMap(self.corredor1.map, self.corredor1.exitsName[1]))
         if rect == self.interactives["PortaDiretoria"]:
             player.change_room(self.portaDiretoria)
+
+        if rect == self.interactives["PortaEnfermaria"] and self.enfermaria == True:
+            player.change_room(self.corredor1.RoomExitClassFromMap(self.corredor1.map, self.corredor1.exitsName[4]))
 
 class EscolaPortaDiretoria(Room):
     def __init__(self,corredor2):

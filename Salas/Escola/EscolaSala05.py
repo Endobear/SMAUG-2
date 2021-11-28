@@ -33,12 +33,16 @@ class Sala05(Room):
             else:
                 self.porta = True
                 self.image = "graphics/Cenario 6/Sala05_porta_"+ str(self.porta) +"_duto_"+ str(self.duto.duto_status) + ".png"
+                self.map.getRoomById("EscolaCorredor1").corredor2.porta_sala = True 
+                self.map.getRoomById("EscolaCorredor1").corredor2.image = "graphics/Cenario 5/Corredor_diretoria_aberta.png"
                 
 
         if rect == self.interactives["porta"]:
             if self.porta == True:
                 self.porta = False
                 self.image = "graphics/Cenario 6/Sala05_porta_"+ str(self.porta) +"_duto_"+ str(self.duto.duto_status) + ".png"
+                self.map.getRoomById("EscolaCorredor1").corredor2.porta_sala = False
+                self.map.getRoomById("EscolaCorredor1").corredor2.image = "graphics/Cenario 5/Corredor_diretoria_fechada.png"
 
         if rect == self.interactives["duto"]:
             if self.porta == False:

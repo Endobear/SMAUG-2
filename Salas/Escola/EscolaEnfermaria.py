@@ -12,7 +12,10 @@ class EscolaEnfermaria(Room):
         self.exitsName = ["Porta","Duto"]
         self.map = map
 
-        self.porta = False
+        self.exits = ["Back"]
+        self.arrows = [BackArrow((486,431))]
+
+        
         self.duto = Duto(self)
 
         self.interactives = {"duto": pygame.Rect((742,309),(100,109)), "armario": pygame.Rect((514,95),(171,302))}
@@ -21,7 +24,7 @@ class EscolaEnfermaria(Room):
         self.id = "EscolaEnfermaria"
     
     def backLocation(self):
-        self.porta = True
+        self.map.getRoomById("EscolaCorredor1").corredor2.enfermaria = True
         return self.RoomExitClassFromMap(self.map,self.exitsName[0])
     
     def ineractRect(self, rect, player):
