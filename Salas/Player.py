@@ -33,6 +33,7 @@ class Player():
 
         if item.dialog != "":
             self.dialog_manager.set_dialog(item.dialog, color = item.dialog_color, overwrite = True)
+            self.state = "dialog"
         self.inventory.add(item)
 
     def change_room(self, room, **karg):
