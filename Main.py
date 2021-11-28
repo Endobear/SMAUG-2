@@ -24,7 +24,6 @@ debug_rects = False
 
 background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
 background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
-
 # player.pickItem(KeyItem())
 # player.pickItem(Screwdriver())
 # player.pickItem(Screwdriver())
@@ -72,6 +71,7 @@ while True:
                 
             if event.key == pygame.K_c:
                 print(background_rects)
+                print(player.state)
 
             if event.key == pygame.K_a:
                 print(player.inventory.sprites())

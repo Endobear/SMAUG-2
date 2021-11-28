@@ -52,9 +52,12 @@ class Dialog_manager():
             self.rect = self.surface.get_rect(center = (427,240))
 
         else:
-            self.dialog_text = [""]
-            self.dialog_key = ""
-            self.current_line = 0
-            self.color = (255,255,255)
-            self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
-            self.rect = self.surface.get_rect(center = (427,240))
+            self.clear_dialog()
+
+    def clear_dialog(self):
+        self.dialog_text = [""]
+        self.dialog_key = ""
+        self.current_line = 0
+        self.color = (255,255,255)
+        self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
+        self.rect = self.surface.get_rect(center = (427,240))

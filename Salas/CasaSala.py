@@ -31,7 +31,7 @@ class CasaSala(Room):
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
         if rect == self.interactives["espelho"]:
-            self.monsterSpawnabble = True
+            
             player.change_room(self.espelho)
 
 
@@ -54,6 +54,7 @@ class SalaEspelho(Room):
     
     def backLocation(self):
         self.sala.map.change_exit("CasaCorredor","CorredorQuarto",self.sala.map.rooms[3])
+        self.sala.monsterSpawnabble = True
         return self.sala
     
     # def ineractRect(self, rect, player):

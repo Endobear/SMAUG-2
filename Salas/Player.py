@@ -1,4 +1,5 @@
 import pygame
+from pygame import surface
 
 from Dialog_manager import Dialog_manager
 from Itens.Arrows import UpArrow
@@ -11,6 +12,9 @@ class Player():
         self.itemHolding = pygame.sprite.GroupSingle()
         self.dialog_manager = Dialog_manager()
         self.state = "default"
+
+        self.newRoom = ""
+        self.transition_lerp = 0
 
         self.inventory = pygame.sprite.Group()
         self.inventory_surf = pygame.image.load("graphics/Inventario.png").convert_alpha() #pygame.Surface((854,50))
@@ -31,20 +35,66 @@ class Player():
         self.inventory.add(item)
 
     def change_room(self,room):
-        self.currentRoom = room
+        if self.state == "default":
+            self.state = "moving"
+            self.newRoom = room
+            # self.currentRoom = room
 
     def update(self,screen):
         screen.blit(self.inventory_surf,self.inventory_rect)
         self.updateInventory(screen,self.inventory_rect)
         
         #TODO Fazer o diálogo aumentar e diminuir a opacidade ao invés de só aparecer
-        if (self.dialog_manager.dialog_key != ""):
+        if (self.dialog_manager.dialog_key != "" and self.state == "default"):
             self.state = "dialog"
-            screen.blit(self.dialog_manager.surface, self.dialog_manager.rect)
-            
-        else:
+
+        if self.dialog_manager.dialog_key != "" and self.state == "moving":
+            self.dialog_manager.clear_dialog()
+                 
+        elif self.dialog_manager.dialog_key == "" and self.state == "dialog":
             self.state = "default"
         
+        
+
+        if self.state == "dialog":
+            screen.blit(self.dialog_manager.surface, self.dialog_manager.rect)
+
+
+            
+        if self.newRoom != "":
+            
+            transition_surface = pygame.Surface((screen.get_width(), screen.get_height()))
+            transition_surface.fill((0,0,0))
+
+            if self.currentRoom != self.newRoom:
+                if self.transition_lerp < 255:
+                    self.transition_lerp += 12
+                    
+                else:
+                    self.transition_lerp = 255
+                    self.currentRoom = self.newRoom
+                    self.state = "default"
+                    
+
+                transition_surface.set_alpha(self.transition_lerp)
+                screen.blit(transition_surface,transition_surface.get_rect())
+
+            elif self.transition_lerp > 0:
+                self.transition_lerp -= 12
+                
+                transition_surface.set_alpha(self.transition_lerp)
+                screen.blit(transition_surface,transition_surface.get_rect())
+
+            else:
+                self.transition_lerp = 0
+                self.newRoom == ""
+                if self.state != "dialog":
+                    self.state = "default"
+            
+
+
+
+            
         
 
     
