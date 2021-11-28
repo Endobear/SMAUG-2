@@ -13,7 +13,7 @@ class EscolaBanheiro(Room):
         self.exitsName = ["Ventilacao","Porta"]
         self.map = map
         self.banheiroCabines = BanheiroCabines(self)
-
+        self.firstTime = True
         self.arrows = [BackArrow((420,450))]
 
         self.interactives = {"porta": pygame.Rect((382,91),(158,298)),
@@ -21,6 +21,16 @@ class EscolaBanheiro(Room):
         
 
         self.id = "EscolaBanheiro"
+
+    def update(self, screen):
+    
+        if self.firstTime == True:
+            self.firstTime = False
+            self.map.monstro.despawn()
+            
+            
+
+        return super().update(screen)
     
     def backLocation(self):
 

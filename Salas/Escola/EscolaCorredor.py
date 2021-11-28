@@ -59,9 +59,9 @@ class EscolaCorredor2(Room):
         
         self.portaDiretoria = EscolaPortaDiretoria(self)
 
-        self.monsterLocation = {"position": (428,308),
-                                "width": 191,
-                                "height": 580}
+        self.monsterLocation = {"position": (421,286),
+                                "width": 88,
+                                "height": 239}
 
         self.id = "EscolaCorredor2"
     
