@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 map = Mapa()
 player = Player()
 map.player = player
-player.currentRoom = map.rooms[0]
+player.currentRoom = map.rooms[3]
 
 debug_rects = False
 
