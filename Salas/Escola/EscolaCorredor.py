@@ -9,7 +9,7 @@ class EscolaCorredor1(Room):
         self.room_name = "EscolaCorredor1"
         self.image = "graphics/Cenario 5/Corredor_armario_disponivel.png"
         self.exits = ["Front"]
-        self.exitsName = ["Banheiro","Sala","Diretoria","Enfermaria"]
+        self.exitsName = ["Banheiro","Sala05","Sala01","Diretoria","Enfermaria"]
         self.map = map
 
         self.corredor2 = EscolaCorredor2(self)
@@ -43,12 +43,12 @@ class EscolaCorredor2(Room):
         self.image = "graphics/Cenario 5/Corredor_diretoria_fechada.png"
         self.exits = ["Back"]
         self.corredor1 = corredor1
-        self.porta_cabine = False
+        self.porta_sala = False
 
         self.arrows = [BackArrow((420,450))]
 
-        self.interactives = {"portaSala": pygame.Rect((257,88),(40,292)),
-                             "PortaDiretoria": pygame.Rect((0,26),(248,430))}
+        self.interactives = {"portaSala": pygame.Rect((314,203),(27,94)),
+                             "PortaDiretoria": pygame.Rect((411,220),(30,32))}
         
 
         self.id = "EscolaCorredor2"
@@ -56,16 +56,16 @@ class EscolaCorredor2(Room):
     def backLocation(self):
 
         return self.corredor1
+        
     
-    # def ineractRect(self, rect, player):
-    #     super().ineractRect(rect, player)
-    #     if rect == self.interactives["cabineDestrancada"]:
-    #         if self.porta_cabine == False:
-    #             self.image = "graphics/Cenario 5/Banheiro_cabine_aberta.png"
-    #             self.porta_cabine = True
-    #         else:
-    #             player.change_room(self.cabine)
-
-    #     if "carrinho" in self.interactives and rect == self.interactives["carrinho"]:
-    #         player.change_room(self.teto)
+    def ineractRect(self, rect, player):
+        super().ineractRect(rect, player)
+        if rect == self.interactives["portaSala"]:
+            if self.porta_sala == False: 
+                self.image = "graphics/Cenario 5/Corredor_diretoria_aberta.png"
+                self.porta_sala = True
+            else:
+                player.change_room(self.corredor1.RoomExitClassFromMap(self.corredor1.map, self.corredor1.exitsName[1]))
+        if rect == self.interactives["PortaDiretoria"]:
+            player.change_room(self.corredor1.RoomExitClassFromMap(self.corredor1.map, self.corredor1.exitsName[3]))
 
