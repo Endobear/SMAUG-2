@@ -26,7 +26,7 @@ class Duto(Room):
         self.middle = DutoMiddle(self)
 
         
-        self.arrows = [BackArrow((420,450)),FrontArrow((420,250))]
+        self.arrows = [BackArrow((420,450)),FrontArrow((420,250), sound = "audio/Sound Effects/crawling_sfx1.mp3")]
         
 
         self.id = "Duto"
@@ -57,7 +57,7 @@ class DutoMiddle(Room):
         
         
 
-        self.arrows = [BackArrow((420,450)),FrontArrow((420,250))]  
+        self.arrows = [BackArrow((420,450), sound = "audio/Sound Effects/crawling_sfx1.mp3"),FrontArrow((420,250), sound = "audio/Sound Effects/crawling_sfx2.mp3")]  
         
 
         self.id = "Duto"
@@ -87,7 +87,7 @@ class DutoExit(Room):
         self.exits = ["Front","Back"]
      
 
-        self.arrows = [BackArrow((420,450)),FrontArrow((420,250))]
+        self.arrows = [BackArrow((420,450), sound = "audio/Sound Effects/crawling_sfx2.mp3"),FrontArrow((420,250), sound = "audio/Sound Effects/crawling_sfx3.mp3")]
         
 
         self.id = "Duto"
