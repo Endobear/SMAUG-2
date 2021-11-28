@@ -42,7 +42,7 @@ class Dialog_manager():
             self.rect = self.surface.get_rect(center = (427,240))
 
        
-    def next_line(self, **karg):
+    def next_line(self):
         
        
         

@@ -34,10 +34,18 @@ class Player():
             self.dialog_manager.set_dialog(item.dialog, color = item.dialog_color, overwrite = True)
         self.inventory.add(item)
 
-    def change_room(self,room):
+    def change_room(self, room, **karg):
         if self.state == "default":
             self.state = "moving"
             self.newRoom = room
+
+            if "sound" in karg:
+                if karg["sound"] != "None":
+                    pygame.mixer.Sound(karg["sound"]).play()
+            else:
+                pygame.mixer.Sound("audio/Sound Effects/PlayerStep.mp3").play()
+            
+            
             # self.currentRoom = room
 
     def update(self,screen):

@@ -44,7 +44,7 @@ class Quarto(Room):
         if rect == self.interactives["comoda"]: # Cômoda do quarto
             
             if not self.quartoTeto.firstTime:
-                player.change_room(self.gaveta)
+                player.change_room(self.gaveta, sound = "None")
                 self.image = "graphics/Cenario 1/Quarto_gaveta_aberta.png"
                 self.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta_aberta.png"
                 
@@ -97,6 +97,8 @@ class QuartoGaveta(Room):
                 chave = KeyItem(dialog = "item_tutorial", dialog_color = (102, 250, 245));
                 chave.set_position((200,200))
                 self.quarto.itens.append(chave)
+                pygame.mixer.Sound("audio/Sound Effects/key_dropping.mp3").play()
+                
             elif self.gancho:
                 player.dialog_manager.set_dialog("interacao_gancho")
                 
