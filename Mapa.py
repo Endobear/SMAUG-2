@@ -29,9 +29,10 @@ class Mapa():
             "CasaCorredor": {"CorredorQuarto":self.rooms[0].quartoPorta, "CorredorSala": self.rooms[2]},
             "CasaSala": {"CasaSalaSaida": self.rooms[1]},
             "EscolaBanheiro": {"Ventilacao": self.rooms[4]},
-            "EscolaCorredor1":{"Banheiro": self.rooms[3], "Sala05": self.rooms[5]},
+            "EscolaCorredor1":{"Banheiro": self.rooms[3], "Sala05": self.rooms[5], "Sala01" : self.rooms[7]},
             "Sala05": {"Porta": self.rooms[4].corredor2, "Duto" : self.rooms[6]},
-            "Duto": {"Entrance": self.rooms[5], "Exit": self.rooms[5]}
+            "Duto": {"Entrance": self.rooms[5], "Exit": self.rooms[5]},
+            "Sala01": {"Porta" : self.rooms[4]}
         }
         # self.rooms = [RoomOne(self),RoomTwo(self)]
         # self.exitsList = {
@@ -50,7 +51,11 @@ class Mapa():
                 return room
     
     def buildVentPath(self,entrance,exit,direction):
-        pass
+        
+        self.rooms[6].direction = direction
+        self.change_exit(self.rooms[6],"Exit",exit)
+        self.change_exit(self.rooms[6],"Entrance",entrance)
+        
 
 
 

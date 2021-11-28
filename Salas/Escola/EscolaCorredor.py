@@ -23,15 +23,10 @@ class EscolaCorredor1(Room):
     def frontLocation(self):
         return self.corredor2
     
-    # def ineractRect(self, rect, player):
-    #     super().ineractRect(rect, player)
-    #     if "screwdriver" in self.interactives and rect == self.interactives["screwdriver"]:
-    #         self.image = "graphics/Cenario 4/Banheiro_Porta.png"
-    #         self.interactives.pop("screwdriver")
-    #         player.pickItem(Screwdriver())
-    #     if rect == self.interactives["porta"]:
-    #         # TODO Diálogo da porta trancada
-    #         pass
+    def ineractRect(self, rect, player):
+        super().ineractRect(rect, player)
+        if rect == self.interactives["sala01"]:
+            player.change_room(self.RoomExitClassFromMap(self.map,self.exitsName[2]))
 
 
 
