@@ -20,6 +20,9 @@ class Room():
 
         self.monsterSpawnabble = False
 
+        self.vida = 100
+        
+
 
         self.room_rects = [arrow.rect for arrow in self.arrows]  + [item.rect for item in self.itens] + [interactives for interactives in self.interactives.values()]
 
@@ -59,10 +62,7 @@ class Room():
         if rect in [arrow.rect for arrow in self.arrows]:
             for arrow in self.arrows:
                 if rect == arrow.rect: 
-                    sound = "audio/Sound Effects/PlayerStep.mp3"
-                    if arrow.locationName != "Front" and arrow.locationName != "Back":
-                        sound = "None"
-                    player.change_room(self.getLocationFromDirection(arrow.locationName), sound = sound)
+                    player.change_room(self.getLocationFromDirection(arrow.locationName), sound = arrow.sound)
                     break;
 
         if rect in [item.rect for item in self.itens]:

@@ -1,5 +1,6 @@
 import pygame
 from pygame.constants import MOUSEMOTION
+from Salas.Escola.Duto import Duto
 from Salas.Player import Player
 from Mapa import Mapa
 from sys import exit
@@ -13,7 +14,7 @@ clock = pygame.time.Clock()
 map = Mapa()
 player = Player()
 map.player = player
-player.currentRoom = map.rooms[0]
+player.currentRoom = map.rooms[3]
 
 debug_rects = False
 

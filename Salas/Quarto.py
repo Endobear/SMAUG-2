@@ -129,7 +129,7 @@ class QuartoPorta(Room):
             if not self.door_status:
                 player.dialog_manager.set_dialog("interacao_porta")
                 if len(self.quarto.arrows) < 2:
-                    self.quarto.arrows.append(UpArrow((420,100)))
+                    self.quarto.arrows.append(UpArrow((420,100), sound = "None"))
             else:
                 player.change_room(self.quarto.RoomExitClassFromMap(self.quarto.map,self.quarto.exitsName[0]))
               
@@ -155,7 +155,7 @@ class QuartoTeto(Room):
         super().__init__()
         self.room_name = "QuartoTeto"
         self.exits = ["Back"]
-        self.arrows = [DiagonalArrow( (127,425), -90)]
+        self.arrows = [DiagonalArrow( (127,425), -90, sound = "None")]
         self.image = "graphics/Cenario 1/Teto_gaveta_fechada.png"
         self.quarto = quarto
         self.firstTime = True

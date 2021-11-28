@@ -3,7 +3,9 @@ from Salas.CasaCorredor import CasaCorredor
 from Salas.CasaSala import CasaSala
 from Salas.Escola.EscolaBanheiro import EscolaBanheiro
 from Salas.Escola.EscolaCorredor import EscolaCorredor1
+from Salas.Escola.EscolaSala01 import Sala01
 from Salas.Escola.EscolaSala05 import Sala05
+from Salas.Escola.Duto import Duto
 from Salas.Player import Player
 from Salas.Quarto import Quarto
 # from Salas.RoomOne import RoomOne
@@ -13,7 +15,7 @@ class Mapa():
     def __init__(self):
 
         casa = [Quarto(self),CasaCorredor(self),CasaSala(self)]
-        escola = [EscolaBanheiro(self),EscolaCorredor1(self), Sala05(self)]
+        escola = [EscolaBanheiro(self),EscolaCorredor1(self), Sala05(self), Duto(self,"Right"), Sala01(self) ]
         self.rooms = casa + escola
         self.player = Player()
         self.monstro = Monstro(self.rooms[2])
@@ -28,7 +30,8 @@ class Mapa():
             "CasaSala": {"CasaSalaSaida": self.rooms[1]},
             "EscolaBanheiro": {"Ventilacao": self.rooms[4]},
             "EscolaCorredor1":{"Banheiro": self.rooms[3], "Sala05": self.rooms[5]},
-            "Sala05": {"Porta": self.rooms[4].corredor2}
+            "Sala05": {"Porta": self.rooms[4].corredor2, "Duto" : self.rooms[6]},
+            "Duto": {"Entrance": self.rooms[5], "Exit": self.rooms[5]}
         }
         # self.rooms = [RoomOne(self),RoomTwo(self)]
         # self.exitsList = {
@@ -40,7 +43,18 @@ class Mapa():
 
     def change_exit(self, room,exit,newExit):
         self.exitsList[room][exit] = newExit
+
+    def getRoomById(self,id):
+        for room in self.rooms:
+            if id == room.id:
+                return room
     
+    def buildVentPath(self,entrance,exit,direction):
+        pass
+
+
+
+
     def update(self,screen):
         if self.player.currentRoom == self.monstro.room and self.player.currentRoom.monsterSpawnabble == True:
             print("I'm here")

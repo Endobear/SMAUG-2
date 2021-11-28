@@ -15,7 +15,7 @@ class EscolaCorredor1(Room):
         self.corredor2 = EscolaCorredor2(self)
         self.arrows = [FrontArrow((420,450))]
 
-        self.interactives = {"armario": pygame.Rect((382,91),(158,298))}
+        self.interactives = {"armario": pygame.Rect((726,108),(75,358)), "sala01": pygame.Rect((279,192),(37,125))}
         
 
         self.id = "EscolaCorredor1"
