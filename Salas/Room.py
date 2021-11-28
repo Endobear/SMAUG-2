@@ -17,6 +17,8 @@ class Room():
         self.arrows = []
         self.ArrowSprites = pygame.sprite.Group(arrow for arrow in self.arrows)
 
+        self.monsterSpawnabble = False
+
         self.sound_effects= pygame.mixer.music;
 
         self.room_rects = [arrow.rect for arrow in self.arrows]  + [item.rect for item in self.itens] + [interactives for interactives in self.interactives.values()]

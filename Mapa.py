@@ -1,3 +1,4 @@
+import pygame
 from Salas.CasaCorredor import CasaCorredor
 from Salas.CasaSala import CasaSala
 from Salas.Escola.EscolaBanheiro import EscolaBanheiro
@@ -14,7 +15,10 @@ class Mapa():
         escola = [EscolaBanheiro(self),EscolaCorredor1(self)]
         self.rooms = casa + escola
         self.player = Player()
-        self.monstro = Monstro(self.rooms[3])
+        self.monstro = Monstro(self.rooms[2])
+
+        self.music_player = pygame.mixer.music;
+        self.monstro.spawn(self.monstro.room,self)
 
 
         self.exitsList = {
@@ -35,14 +39,30 @@ class Mapa():
     def change_exit(self, room,exit,newExit):
         self.exitsList[room][exit] = newExit
     
-    def update():
+    def update(self,screen):
+        if self.player.currentRoom == self.monstro.room and self.player.currentRoom.monsterSpawnabble == True:
+            print("I'm here")
+            if self.music_player.get_pos() < 0:
+                
+                self.music_player.play(loops = -1)
+
+            screen.blit(self.monstro.surface, self.monstro.rect)
         
-        pass
-    
 
 class Monstro():
     def __init__(self,room) -> None:
         self.room = room
-        self.image = "graphics/Monstro/Parado.png"
+        self.image = "graphics/Monstro/Parado.png" 
+        self.surface = pygame.image.load(self.image).convert_alpha()
+        self.rect = self.surface.get_rect(center = (250,250))
         self.chasing = False
         self.spawnabble = False
+
+    def spawn(self,room,map):
+        self.surface = pygame.transform.scale(pygame.image.load(self.image).convert_alpha(), (room.monsterLocation["width"], room.monsterLocation["height"]))
+        self.rect = self.surface.get_rect(center = self.room.monsterLocation["position"])   
+        map.music_player.load("audio/Music/Tenssion.mp3")
+        
+
+
+        

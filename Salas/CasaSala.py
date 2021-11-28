@@ -17,8 +17,10 @@ class CasaSala(Room):
 
         self.interactives = {"espelho": pygame.Rect((153,89),(186,133))}
         
-        self.monsterSpawnabble = False
-        self.monsterLocation = [(240,500)]
+        
+        self.monsterLocation = {"position": (700,202),
+                                "width": 73,
+                                "height": 239}
 
         self.id = "CasaSala"
     
@@ -29,6 +31,7 @@ class CasaSala(Room):
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
         if rect == self.interactives["espelho"]:
+            self.monsterSpawnabble = True
             player.change_room(self.espelho)
 
 

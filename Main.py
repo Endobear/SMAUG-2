@@ -13,7 +13,7 @@ clock = pygame.time.Clock()
 map = Mapa()
 player = Player()
 map.player = player
-player.currentRoom = map.rooms[0]
+player.currentRoom = map.rooms[1]
 
 debug_rects = False
 
@@ -103,6 +103,8 @@ while True:
     
     screen.blit(background_surf,(0,0))
     player.currentRoom.update(screen)
+
+    map.update(screen)
 
     # inventory_surf.fill(pygame.Color(0,0,255))
     # inventory_surf.set_alpha(123)
