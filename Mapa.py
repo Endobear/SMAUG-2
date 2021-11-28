@@ -90,7 +90,7 @@ class Monstro():
         self.spawnabble = False
     
     def despawn(self):
-        pygame.mixer.music.fadeout(500)
+        pygame.mixer.music.fadeout(3000)
         self.room = ""
         self.spawnabble = True
 

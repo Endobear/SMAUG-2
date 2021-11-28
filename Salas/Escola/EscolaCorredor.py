@@ -11,7 +11,8 @@ class EscolaCorredor1(Room):
         self.exits = ["Front","Back"]
         self.exitsName = ["Banheiro","Sala05","Sala01","Diretoria","Enfermaria","Saida"]
         self.map = map
-        self.isHide = True
+        self.armario = CorredorArmario(self)
+        
 
         self.corredor2 = EscolaCorredor2(self)
         self.exitDoor = EscolaSaida(self)
@@ -32,6 +33,9 @@ class EscolaCorredor1(Room):
         super().ineractRect(rect, player)
         if rect == self.interactives["sala01"]:
             player.change_room(self.RoomExitClassFromMap(self.map,self.exitsName[2]))
+        if rect == self.interactives["armario"]:
+            player.change_room(self.armario)
+
 
 
 
@@ -147,4 +151,17 @@ class EscolaSaida(Room):
         super().ineractRect(rect, player)
         if rect == self.interactives["PortaSaida"]:
             player.change_room(self.corredor1.RoomExitClassFromMap(self.corredor1.map, self.corredor1.exitsName[5]))
+
+class CorredorArmario(Room):
+    def __init__(self,corredor):
+        super().__init__()
+        self.room_name = "CorredorArmario"
+        self.image = "graphics/Cenario 5/Corredor_hide.png"
+        self.exits = ["Front"]
+        self.isHide = True
+        self.corredor = corredor
+        self.arrows = [FrontArrow((420,450))]
+
+    def frontLocation(self):
+        return self.corredor
 
