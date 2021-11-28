@@ -69,7 +69,7 @@ class Mapa():
             if self.music_player.get_pos() < 0:
                 self.music_player.load("audio/Music/Tenssion.mp3")
                 self.music_player.play(loops = -1)
-
+            self.player.vida -= 0.25
             screen.blit(self.monstro.surface, self.monstro.rect)
         
 

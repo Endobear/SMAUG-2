@@ -1,5 +1,5 @@
 import pygame
-from pygame import surface
+from pygame import Surface, surface
 
 from Dialog_manager import Dialog_manager
 from Itens.Arrows import UpArrow
@@ -23,6 +23,7 @@ class Player():
         self.hover_inventory = False
         self.inventory_lerp = 0
 
+        self.vida = 100
         
 
     #133
@@ -99,7 +100,12 @@ class Player():
                 if self.state != "dialog":
                     self.state = "default"
             
-
+        red_border = pygame.transform.scale( pygame.image.load("graphics/red_screen.png").convert_alpha(), (screen.get_width(), screen.get_height()))
+        life_remap = (((self.vida - 0) * (255 - 0))/ (100 - 0)) + 0
+        
+        red_border.set_alpha( 255 - life_remap)
+        
+        screen.blit(red_border, red_border.get_rect())
 
 
             
@@ -110,7 +116,7 @@ class Player():
         
         
         index = 0
-        inventory_slots = [(56,28),(112,28),(160,28),(210,28),(260,28)]
+        inventory_slots = [(58,28),(112,28),(160,28),(210,28),(260,28)]
         for item in self.inventory.sprites():
             if self.itemHolding.has(item) == False:
                 item.rect.center = (rect.x + inventory_slots[index][0], rect.y + inventory_slots[index][1] )

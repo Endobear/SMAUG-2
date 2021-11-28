@@ -26,6 +26,8 @@ class Quarto(Room):
 
         self.tutorial_phase = 0
 
+    
+
         
 
     
@@ -95,9 +97,11 @@ class QuartoGaveta(Room):
                 self.image = "graphics/Cenario 1/gaveta.png"
                 self.quarto.quartoTeto.image = "graphics/Cenario 1/Teto_gaveta.png"
                 chave = KeyItem(dialog = "item_tutorial", dialog_color = (102, 250, 245));
-                chave.set_position((200,200))
+                chave.rect.x = 400
+                chave.rect.y = 318
                 self.quarto.itens.append(chave)
                 pygame.mixer.Sound("audio/Sound Effects/key_dropping.mp3").play()
+                
                 
             elif self.gancho:
                 player.dialog_manager.set_dialog("interacao_gancho")
@@ -147,6 +151,7 @@ class QuartoPorta(Room):
                 print("abriu")
                 player.inventory.remove(itemHolding)
                 self.door_status = True
+                pygame.mixer.Sound("audio/Sound Effects/open_door.mp3").play()
                 self.image = "graphics/Cenario 1/Quarto_porta_aberta.png"
 
 

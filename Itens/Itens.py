@@ -25,7 +25,8 @@ class KeyItem(Item):
 
     def __init__(self, **kword) -> None:
         super().__init__(**kword)
-        self.image = pygame.image.load("graphics/key.png").convert_alpha()
+        self.image = pygame.transform.scale(pygame.image.load("graphics/Key_Item.png").convert_alpha(), (47, 27))
+        self.icon = self.image
         self.rect = self.image.get_rect()
         self.type = "Door_Key"
 

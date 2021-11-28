@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 map = Mapa()
 player = Player()
 map.player = player
-player.currentRoom = map.rooms[3]
+player.currentRoom = map.rooms[0]
 
 debug_rects = False
 
@@ -97,6 +97,7 @@ while True:
                 
                         
     background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
+
     background_rects = player.currentRoom.room_rects
 
 
