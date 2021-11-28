@@ -17,6 +17,7 @@ class Room():
         self.itens_sprites = pygame.sprite.Group(item for item in self.itens)
         self.arrows = []
         self.ArrowSprites = pygame.sprite.Group(arrow for arrow in self.arrows)
+        self.isHide = False
 
         self.monsterSpawnabble = False
 

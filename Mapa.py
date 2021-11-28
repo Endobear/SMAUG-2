@@ -22,7 +22,7 @@ class Mapa():
         self.monstro = Monstro(self.rooms[2])
 
         self.music_player = pygame.mixer.music;
-        self.monstro.spawn(self.monstro.room,self)
+        self.monstro.spawn(self.monstro.room)
 
 
         self.exitsList = {
@@ -83,11 +83,16 @@ class Monstro():
         self.chasing = False
         self.spawnabble = False
 
-    def spawn(self,room,map):
+    def spawn(self,room):
         self.surface = pygame.transform.scale(pygame.image.load(self.image).convert_alpha(), (room.monsterLocation["width"], room.monsterLocation["height"]))
-        self.rect = self.surface.get_rect(center = self.room.monsterLocation["position"])   
-        
-        
+        self.rect = self.surface.get_rect(center = room.monsterLocation["position"])
+        self.room = room
+        self.spawnabble = False
+    
+    def despawn(self):
+        pygame.mixer.music.fadeout(500)
+        self.room = ""
+        self.spawnabble = True
 
 
         

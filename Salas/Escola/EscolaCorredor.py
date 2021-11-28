@@ -11,6 +11,7 @@ class EscolaCorredor1(Room):
         self.exits = ["Front","Back"]
         self.exitsName = ["Banheiro","Sala05","Sala01","Diretoria","Enfermaria","Saida"]
         self.map = map
+        self.isHide = True
 
         self.corredor2 = EscolaCorredor2(self)
         self.exitDoor = EscolaSaida(self)
@@ -44,7 +45,8 @@ class EscolaCorredor2(Room):
         self.corredor1 = corredor1
         self.porta_sala = False
         self.enfermaria = False
-
+        self.firstTime = True
+        
         self.arrows = [BackArrow((420,450))]
 
         self.interactives = {"portaSala": pygame.Rect((314,203),(27,94)),
@@ -53,13 +55,28 @@ class EscolaCorredor2(Room):
         
         self.portaDiretoria = EscolaPortaDiretoria(self)
 
+        self.monsterLocation = {"position": (428,308),
+                                "width": 191,
+                                "height": 580}
+
         self.id = "EscolaCorredor2"
     
     def backLocation(self):
 
         return self.corredor1
         
+    def update(self, screen):
     
+        if self.firstTime == True:
+            self.firstTime = False
+            self.monsterSpawnabble = True
+            self.corredor1.map.monstro.spawn(self)
+            
+            
+
+        return super().update(screen)
+
+
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
         if rect == self.interactives["portaSala"]:

@@ -1,3 +1,4 @@
+from random import randint
 import pygame
 from pygame.constants import MOUSEMOTION
 from Salas.Escola.Duto import Duto
@@ -31,6 +32,9 @@ background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
 # player.pickItem(Screwdriver())
 # player.pickItem(Screwdriver())
 
+
+monster_timer = pygame.USEREVENT + 1
+pygame.time.set_timer(monster_timer, 2800)
 
 while True:
     for event in pygame.event.get():
@@ -94,7 +98,22 @@ while True:
             if player.itemHolding.sprites() != []: 
                 
                 player.itemHolding.sprites()[0].rect.center = event.pos
-                
+        
+        if event.type == monster_timer:
+            monster = map.monstro
+            number = randint(0,10)
+            if player.currentRoom.isHide == True:
+                monster.despawn()
+            if monster.spawnabble == True:
+                if number == 10:
+                    spawn_location = map.rooms[4].corredor2
+                    if spawn_location.monsterSpawnabble == True:
+                        monster.spawn(spawn_location)
+                        print(map.monstro)
+
+            
+            print("BU", number)
+
                         
     background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()
 
