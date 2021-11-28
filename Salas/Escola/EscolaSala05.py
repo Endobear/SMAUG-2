@@ -61,7 +61,7 @@ class Duto(Room):
         
         self.arrows = [BackArrow((420,450))]
 
-        self.interactives = {"duto": pygame.Rect((77,75),(721,195))}
+        self.interactives = {"duto": pygame.Rect((107,38),(637,420))}
         
 
         self.id = "Sala05Duto"
@@ -84,4 +84,4 @@ class Duto(Room):
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
         if rect == self.interactives["duto"] and self.duto_status:
-            player.change_room(self.sala05.RoomExitClassFromMap(self.sala05.map,self.sala05.exitsName[1]))
+            player.change_room(self.sala05.map.buildVentPath(self.sala05, self.sala05.map.rooms[8], "Left" ))

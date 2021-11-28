@@ -3,6 +3,7 @@ from Salas.CasaCorredor import CasaCorredor
 from Salas.CasaSala import CasaSala
 from Salas.Escola.EscolaBanheiro import EscolaBanheiro
 from Salas.Escola.EscolaCorredor import EscolaCorredor1
+from Salas.Escola.EscolaEnfermaria import EscolaEnfermaria
 from Salas.Escola.EscolaSala01 import Sala01
 from Salas.Escola.EscolaSala05 import Sala05
 from Salas.Escola.Duto import Duto
@@ -15,7 +16,7 @@ class Mapa():
     def __init__(self):
 
         casa = [Quarto(self),CasaCorredor(self),CasaSala(self)]
-        escola = [EscolaBanheiro(self),EscolaCorredor1(self), Sala05(self), Duto(self,"Right"), Sala01(self) ]
+        escola = [EscolaBanheiro(self),EscolaCorredor1(self), Sala05(self), Duto(self,"Right"), Sala01(self), EscolaEnfermaria(self) ]
         self.rooms = casa + escola
         self.player = Player()
         self.monstro = Monstro(self.rooms[2])
@@ -31,7 +32,7 @@ class Mapa():
             "EscolaBanheiro": {"Ventilacao": self.rooms[4]},
             "EscolaCorredor1":{"Banheiro": self.rooms[3], "Sala05": self.rooms[5], "Sala01" : self.rooms[7]},
             "Sala05": {"Porta": self.rooms[4].corredor2, "Duto" : self.rooms[6]},
-            "Duto": {"Entrance": self.rooms[5], "Exit": self.rooms[5]},
+            "Duto": {"Entrance": self.rooms[5], "Exit": self.rooms[6]},
             "Sala01": {"Porta" : self.rooms[4]}
         }
         # self.rooms = [RoomOne(self),RoomTwo(self)]
@@ -53,8 +54,9 @@ class Mapa():
     def buildVentPath(self,entrance,exit,direction):
         
         self.rooms[6].direction = direction
-        self.change_exit(self.rooms[6],"Exit",exit)
-        self.change_exit(self.rooms[6],"Entrance",entrance)
+        self.change_exit(self.rooms[6].id,"Exit",exit)
+        self.change_exit(self.rooms[6].id,"Entrance",entrance)
+        return self.rooms[6]
         
 
 

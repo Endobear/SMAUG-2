@@ -27,8 +27,6 @@ class Duto(Room):
 
         
         self.arrows = [BackArrow((420,450)),FrontArrow((420,250))]
-
-        self.interactives = {"armario": pygame.Rect((382,91),(158,298))}
         
 
         self.id = "Duto"
@@ -60,7 +58,6 @@ class DutoMiddle(Room):
         
 
         self.arrows = [BackArrow((420,450)),FrontArrow((420,250))]  
-        self.interactives = {"armario": pygame.Rect((382,91),(158,298))}
         
 
         self.id = "Duto"
@@ -91,8 +88,6 @@ class DutoExit(Room):
      
 
         self.arrows = [BackArrow((420,450)),FrontArrow((420,250))]
-
-        self.interactives = {"armario": pygame.Rect((382,91),(158,298))}
         
 
         self.id = "Duto"
