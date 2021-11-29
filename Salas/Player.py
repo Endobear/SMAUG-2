@@ -13,6 +13,7 @@ class Player():
         self.dialog_manager = Dialog_manager()
         self.state = "default"
 
+        self.game_over = False
         self.newRoom = ""
         self.transition_lerp = 0
 
@@ -107,6 +108,12 @@ class Player():
         red_border.set_alpha( 255 - life_remap)
         
         screen.blit(red_border, red_border.get_rect())
+
+        if self.vida <= 0 and self.game_over == False:
+
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("audio/Sound Effects/jumpscare.mp3"))
+            self.game_over = True
+
 
 
             

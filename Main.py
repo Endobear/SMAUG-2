@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 map = Mapa()
 player = Player()
 map.player = player
-player.currentRoom = map.rooms[0]
+player.currentRoom = map.rooms[1]
 
 debug_rects = False
 
@@ -31,6 +31,9 @@ background_rects = player.currentRoom.room_rects + player.itemHolding.sprites()
 # player.pickItem(Screwdriver())
 # player.pickItem(Screwdriver())
 # player.pickItem(Screwdriver())
+
+game_over = (pygame.USEREVENT + 2)
+pygame.mixer.Channel(1).set_endevent(game_over)
 
 
 monster_timer = pygame.USEREVENT + 1
@@ -102,17 +105,27 @@ while True:
         if event.type == monster_timer:
             monster = map.monstro
             number = randint(0,10)
+
+
             if player.currentRoom.isHide == True:
                 monster.despawn()
-            if monster.spawnabble == True:
-                if number == 10:
-                    spawn_location = map.rooms[4].corredor2
-                    if spawn_location.monsterSpawnabble == True:
-                        monster.spawn(spawn_location)
-                        print(map.monstro)
 
             
+            if monster.spawnabble == True:
+                if number == 10:
+                
+                    spawn_location = [map.rooms[4].corredor2, map.rooms[5]]
+                    index = randint(0,len(spawn_location)-1)
+
+                    if spawn_location[index].monsterSpawnabble == True:
+                        monster.spawn(spawn_location[index])
+                        print(map.monstro)
             print("BU", number)
+
+        if event.type == game_over:
+            exit()
+            
+            
 
                         
     background_surf = pygame.image.load(player.currentRoom.image).convert_alpha()

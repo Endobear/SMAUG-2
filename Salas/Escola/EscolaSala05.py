@@ -19,6 +19,11 @@ class Sala05(Room):
 
         self.interactives = {"duto": pygame.Rect((579,291),(98,66)), "saida": pygame.Rect((729,97),(98,346)), "porta": pygame.Rect((613,130),(119,260))}
         
+        self.monsterLocation = {"position": (341,267),
+                                "width": 97,
+                                "height": 302}
+
+        self.monsterSpawnabble = True
 
         self.id = "Sala05"
     

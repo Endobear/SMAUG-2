@@ -63,6 +63,7 @@ class EscolaCorredor2(Room):
                                 "width": 88,
                                 "height": 239}
 
+
         self.id = "EscolaCorredor2"
     
     def backLocation(self):
