@@ -25,10 +25,17 @@ class KeyItem(Item):
 
     def __init__(self, **kword) -> None:
         super().__init__(**kword)
-        self.image = pygame.transform.scale(pygame.image.load("graphics/Key_Item.png").convert_alpha(), (47, 27))
+        image = "graphics/Key_Item.png"
+        if "image" in kword:
+            image = kword["image"]
+        self.image = pygame.transform.scale(pygame.image.load(image).convert_alpha(), (47, 27))
         self.icon = self.image
         self.rect = self.image.get_rect()
         self.type = "Door_Key"
+        self.id = ""
+        if "id" in kword:
+            self.id = kword["id"]
+
 
 class Screwdriver(Item):
     def __init__(self, **kword) -> None:

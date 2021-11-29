@@ -3,6 +3,8 @@ from Salas.Room import Room
 
 from Itens.Arrows import BackArrow, FrontArrow, DiagonalArrow
 
+from Itens.Itens import KeyItem
+
 class EscolaCorredor1(Room):
     def __init__(self,map):
         super().__init__()
@@ -13,6 +15,8 @@ class EscolaCorredor1(Room):
         self.map = map
         self.armario = CorredorArmario(self)
         
+        self.porta_sala01_status = False
+
 
         self.corredor2 = EscolaCorredor2(self)
         self.exitDoor = EscolaSaida(self)
@@ -29,10 +33,22 @@ class EscolaCorredor1(Room):
     def backLocation(self):
         return self.exitDoor
     
+    def useItem(self, rect, player):
+        itemHolding = player.itemHolding.sprites()[0]
+        if rect in [interactives for interactives in self.interactives.values()]:
+            if rect == self.interactives["sala01"] and itemHolding.type == KeyItem().type and itemHolding.id == "Sala01":
+                print("abriu")
+                player.inventory.remove(itemHolding)
+                self.porta_sala01_status = True
+                pygame.mixer.Sound("audio/Sound Effects/unlock_door.mp3").play()
+    
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
         if rect == self.interactives["sala01"]:
-            player.change_room(self.RoomExitClassFromMap(self.map,self.exitsName[2]))
+            if self.porta_sala01_status == False:
+                pygame.mixer.Sound("audio/Sound Effects/locked_door.mp3").play()
+            else:
+                player.change_room(self.RoomExitClassFromMap(self.map,self.exitsName[2]))
         if rect == self.interactives["armario"]:
             player.change_room(self.armario)
 
@@ -124,10 +140,10 @@ class EscolaPortaDiretoria(Room):
     def useItem(self, rect, player):
         itemHolding = player.itemHolding.sprites()[0]
         if rect in [interactives for interactives in self.interactives.values()]:
-            if rect == self.interactives["PortaDiretoria"] and itemHolding.type == KeyItem().type:
+            if rect == self.interactives["PortaDiretoria"] and itemHolding.type == KeyItem().type and itemHolding.id == "Diretoria":
                 print("abriu")
                 player.inventory.remove(itemHolding)
-                self.door_status = True
+                self.porta_sala = True
                 pygame.mixer.Sound("audio/Sound Effects/open_door.mp3").play()
                 self.image = "graphics/Cenario 5/Corredor_diretoria_porta.png"
     

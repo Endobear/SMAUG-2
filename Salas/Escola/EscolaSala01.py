@@ -2,7 +2,7 @@ import pygame
 from Salas.Room import Room
 
 from Itens.Arrows import BackArrow, FrontArrow
-from Itens.Itens import Screwdriver
+from Itens.Itens import KeyItem, Screwdriver
 
 class Sala01(Room):
     def __init__(self,map):
@@ -25,7 +25,9 @@ class Sala01(Room):
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
         if rect == self.interactives["gaveta"]:
-           self.image = "graphics/Cenario 7/sala01_gaveta_aberta.png"
+            if self.gaveta == False:
+                self.image = "graphics/Cenario 7/sala01_gaveta_aberta.png"
+                player.pickItem(KeyItem(id = "Diretoria", image ="graphics/key_silver.png"))
 
         if rect == self.interactives["porta"]:
            

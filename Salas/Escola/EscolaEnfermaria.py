@@ -4,6 +4,8 @@ from Salas.Room import Room
 from Itens.Arrows import BackArrow
 from Itens.Itens import Screwdriver
 
+from Itens.Itens import KeyItem
+
 class EscolaEnfermaria(Room):
     def __init__(self,map):
         super().__init__()
@@ -14,6 +16,12 @@ class EscolaEnfermaria(Room):
 
         self.exits = ["Back"]
         self.arrows = [BackArrow((486,431))]
+
+        chave = KeyItem(id ="Sala01", image ="graphics/key_bronze.png")
+        chave.rect.x = 599
+        chave.rect.y = 411
+
+        self.itens = [chave]
 
         
         self.duto = Duto(self)
@@ -35,6 +43,13 @@ class EscolaEnfermaria(Room):
 
         if rect == self.interactives["duto"]:
             player.change_room(self.duto)
+
+    def update(self, screen):
+        if self.map.player.vida < 100:
+            self.map.player.vida += 1
+        else:
+            self.map.player.vida = 100
+        return super().update(screen)
             
             
 
