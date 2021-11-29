@@ -5,6 +5,8 @@ from Itens.Arrows import BackArrow, FrontArrow, DiagonalArrow
 
 from Itens.Itens import KeyItem
 
+from sys import exit
+
 class EscolaCorredor1(Room):
     def __init__(self,map):
         super().__init__()
@@ -149,8 +151,10 @@ class EscolaPortaDiretoria(Room):
     
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
-        # if rect == self.interactives["PortaDiretoria"]:
-        #     player.change_room(self.corredor2.corredor1.RoomExitClassFromMap(self.corredor2.corredor1.map, self.corredor2.corredor1.exitsName[3]))
+        if rect == self.interactives["PortaDiretoria"] and self.porta_sala == True:
+            pygame.mixer.music.load("audio/music/Dream Paradox (original Theme 2).mp3")
+            pygame.mixer.music.play()
+            player.change_room(Creditos(player))
 
 class EscolaSaida(Room):
     def __init__(self,corredor1):
@@ -191,3 +195,19 @@ class CorredorArmario(Room):
     def frontLocation(self):
         return self.corredor
 
+class Creditos(Room):
+    def __init__(self,player):
+        super().__init__()
+        self.room_name = "CorredorArmario"
+        self.image = "graphics/CREDITOS.png"
+        player.vida = 100
+        self.interactives = {"tela": pygame.Rect((854,480),(0,0))}
+
+    def ineractRect(self, rect, player):
+        super().ineractRect(rect, player)
+        if rect == self.interactives["tela"]:
+            exit()
+
+
+    
+        

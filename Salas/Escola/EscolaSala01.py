@@ -28,6 +28,7 @@ class Sala01(Room):
             if self.gaveta == False:
                 self.image = "graphics/Cenario 7/sala01_gaveta_aberta.png"
                 player.pickItem(KeyItem(id = "Diretoria", image ="graphics/key_silver.png"))
+                self.gaveta = True
 
         if rect == self.interactives["porta"]:
            
