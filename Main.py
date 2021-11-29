@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 map = Mapa()
 player = Player()
 map.player = player
-player.currentRoom = map.rooms[1]
+player.currentRoom = map.rooms[4]
 
 debug_rects = False
 
@@ -85,6 +85,7 @@ while True:
                 print(player.inventory.sprites())
                 print(player.itemHolding.sprites())
 
+
             if event.key == pygame.K_s:
                 print(player.inventory)
                 print(player.itemHolding)
@@ -123,7 +124,9 @@ while True:
             print("BU", number)
 
         if event.type == game_over:
-            exit()
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+            if player.game_over:
+                exit()
             
             
 

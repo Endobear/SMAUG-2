@@ -112,7 +112,7 @@ class EscolaPortaDiretoria(Room):
 
         self.arrows = [BackArrow((420,450))]
 
-        self.interactives = {"PortaDiretoria": pygame.Rect((411,220),(30,32))}
+        self.interactives = {"PortaDiretoria": pygame.Rect((333,132),(166,255))}
         
 
         self.id = "EscolaPortaDiretoria"
@@ -121,11 +121,20 @@ class EscolaPortaDiretoria(Room):
 
         return self.corredor2
         
+    def useItem(self, rect, player):
+        itemHolding = player.itemHolding.sprites()[0]
+        if rect in [interactives for interactives in self.interactives.values()]:
+            if rect == self.interactives["PortaDiretoria"] and itemHolding.type == KeyItem().type:
+                print("abriu")
+                player.inventory.remove(itemHolding)
+                self.door_status = True
+                pygame.mixer.Sound("audio/Sound Effects/open_door.mp3").play()
+                self.image = "graphics/Cenario 5/Corredor_diretoria_porta.png"
     
     def ineractRect(self, rect, player):
         super().ineractRect(rect, player)
-        if rect == self.interactives["PortaDiretoria"]:
-            player.change_room(self.corredor2.corredor1.RoomExitClassFromMap(self.corredor2.corredor1.map, self.corredor2.corredor1.exitsName[3]))
+        # if rect == self.interactives["PortaDiretoria"]:
+        #     player.change_room(self.corredor2.corredor1.RoomExitClassFromMap(self.corredor2.corredor1.map, self.corredor2.corredor1.exitsName[3]))
 
 class EscolaSaida(Room):
     def __init__(self,corredor1):
@@ -148,10 +157,10 @@ class EscolaSaida(Room):
         return self.corredor1
         
     
-    def ineractRect(self, rect, player):
-        super().ineractRect(rect, player)
-        if rect == self.interactives["PortaSaida"]:
-            player.change_room(self.corredor1.RoomExitClassFromMap(self.corredor1.map, self.corredor1.exitsName[5]))
+    # def ineractRect(self, rect, player):
+    #     super().ineractRect(rect, player)
+    #     if rect == self.interactives["PortaSaida"]:
+    #         player.change_room(self.corredor1.RoomExitClassFromMap(self.corredor1.map, self.corredor1.exitsName[5]))
 
 class CorredorArmario(Room):
     def __init__(self,corredor):
