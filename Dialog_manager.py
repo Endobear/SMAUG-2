@@ -61,3 +61,42 @@ class Dialog_manager():
         self.color = (255,255,255)
         self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
         self.rect = self.surface.get_rect(center = (427,240))
+
+def runLenght(arquivo):
+    #Descompressão
+            arquivo = open("Compressed/arquivoComprimido.txt",encoding="utf-8")
+            texto = arquivo.read()
+            letra_anterior= ""
+            letras = 0
+
+            lendo_compressao = False
+            numeros = ["1","2","3","4","5","6","7","8","9"]
+            texto_descomprimido = ""
+            index = 0
+            for caractere_atual in texto:
+                if caractere_atual == "#":
+                    lendo_compressao = True
+
+                elif lendo_compressao == True:
+                    print(caractere_atual in numeros)
+                    if (caractere_atual in numeros) == True:
+                        letra_anterior += caractere_atual
+                    else:
+                        letras = int(letra_anterior)
+                        while letras > 0:
+                            texto_descomprimido += caractere_atual
+                            letras -= 1
+                        letra_anterior = ""
+                        lendo_compressao = False
+                        
+                else:
+                    texto_descomprimido += caractere_atual
+
+                
+                index += 1
+                
+            
+            print("Texto comprimido:\n" + texto_descomprimido)
+            
+            arquivo.close()
+            return texto_descomprimido
