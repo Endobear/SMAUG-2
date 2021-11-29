@@ -72,23 +72,23 @@ while True:
                 
                 player.itemHolding.empty()
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+        # if event.type == pygame.KEYDOWN:
+            # if event.key == pygame.K_SPACE:
                 
-                debug_rects = not debug_rects
+            #     debug_rects = not debug_rects
                 
-            if event.key == pygame.K_c:
-                print(background_rects)
-                print(player.state)
+            # if event.key == pygame.K_c:
+            #     print(background_rects)
+            #     print(player.state)
 
-            if event.key == pygame.K_a:
-                print(player.inventory.sprites())
-                print(player.itemHolding.sprites())
+            # if event.key == pygame.K_a:
+            #     print(player.inventory.sprites())
+            #     print(player.itemHolding.sprites())
 
 
-            if event.key == pygame.K_s:
-                print(player.inventory)
-                print(player.itemHolding)
+            # if event.key == pygame.K_s:
+            #     print(player.inventory)
+            #     print(player.itemHolding)
         
         if event.type == pygame.MOUSEMOTION:
             
