@@ -1,4 +1,5 @@
 from os import write
+import os
 import pygame
 import json
 
@@ -20,14 +21,27 @@ class Dialog_manager():
 
     def set_dialog(self, dialogKey, **karg):
         
+        
+        
         if self.dialog_key == "" or "overwrite" in karg:
             file = open("Dialogues/"+ dialogKey +".json", mode="r", encoding="utf-8")
         
+            print("ARQUIVO:  ",file)
+            runLenght(file,dialogKey)
+            file.close()
 
+            file = open("Uncompressed/"+dialogKey+".json","r",encoding="utf-8")
+
+
+            
             texto = json.load(file)
+            
+            
+            
             texto = texto["text"] #transformando dicioário em uma lista para ordernar as linhas de diálogo.
 
             file.close()
+            os.remove("Uncompressed/"+dialogKey+".json")
 
             print(texto)
             print(len(texto))
@@ -62,41 +76,48 @@ class Dialog_manager():
         self.surface = self.font.render(self.dialog_text[self.current_line],False,self.color)
         self.rect = self.surface.get_rect(center = (427,240))
 
-def runLenght(arquivo):
-    #Descompressão
-            arquivo = open("Compressed/arquivoComprimido.txt",encoding="utf-8")
-            texto = arquivo.read()
-            letra_anterior= ""
-            letras = 0
 
-            lendo_compressao = False
-            numeros = ["1","2","3","4","5","6","7","8","9"]
-            texto_descomprimido = ""
-            index = 0
-            for caractere_atual in texto:
-                if caractere_atual == "#":
-                    lendo_compressao = True
 
-                elif lendo_compressao == True:
-                    print(caractere_atual in numeros)
-                    if (caractere_atual in numeros) == True:
-                        letra_anterior += caractere_atual
-                    else:
-                        letras = int(letra_anterior)
-                        while letras > 0:
-                            texto_descomprimido += caractere_atual
-                            letras -= 1
-                        letra_anterior = ""
-                        lendo_compressao = False
-                        
-                else:
+
+ #Descompressão   
+def runLenght(arquivo,dialogKey):
+   
+    texto = arquivo.read()
+    letra_anterior= ""
+    letras = 0
+
+    lendo_compressao = False
+    numeros = ["1","2","3","4","5","6","7","8","9"]
+    texto_descomprimido = ""
+    index = 0
+    for caractere_atual in texto:
+        if caractere_atual == "#":
+            lendo_compressao = True
+
+        elif lendo_compressao == True:
+            print(caractere_atual in numeros)
+            if (caractere_atual in numeros) == True:
+                letra_anterior += caractere_atual
+            else:
+                letras = int(letra_anterior)
+                while letras > 0:
                     texto_descomprimido += caractere_atual
+                    letras -= 1
+                letra_anterior = ""
+                lendo_compressao = False
+                        
+        else:
+            texto_descomprimido += caractere_atual
 
                 
-                index += 1
+        index += 1
                 
             
-            print("Texto comprimido:\n" + texto_descomprimido)
-            
-            arquivo.close()
-            return texto_descomprimido
+    # print("Texto descomprimido:\n" + texto_descomprimido)
+
+    arquivo = open("Uncompressed/"+dialogKey+".json","w",encoding="utf-8")
+    arquivo.truncate(0)
+    arquivo.write(texto_descomprimido)
+    arquivo.close()
+
+
